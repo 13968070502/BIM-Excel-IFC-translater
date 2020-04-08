@@ -6,7 +6,11 @@ import os
 path = 'C:\\Masterarbeit\\Programmieren\\Dateien'
 os.chdir(path)
 
-pokemondata = path+'\\pokemon_data.csv'
+dataname = 'pokemon_data'
+
+pokemondata = path+'\\'+str(dataname)+'.csv'
+
+print pokemondata
 
 df = pd.read_csv(pokemondata)
 
