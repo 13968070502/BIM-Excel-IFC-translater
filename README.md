@@ -1,7 +1,6 @@
 # BIM-Excel-IFC-translater
 
-TODO: summarize the purpose of this tool in up to three short sentences.
-
+Development of an IFC-compliant translator, that can create an IFC-instance based on an Excel table filled with data, so that a BIM-model can be generated from it.
 
 ## Description
 The repo contains the source code on root level. This is a list of subdirs:
