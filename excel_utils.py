@@ -1,3 +1,6 @@
+"""A collection of utility functions for excel file handling."""
+
+
 def read_in_col(coords, ws):
     """Read data from column starting below given coordinates."""
     data = []
