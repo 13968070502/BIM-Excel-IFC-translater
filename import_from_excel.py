@@ -8,12 +8,12 @@ from excel_utils import read_in_col, read_in_row
 
 
 def get_only(component, data):
-    return [x for x in data if x['Component'] == component]
+    return [x for x in data if x['COMPONENT'] == component]
 
 
 def show_data(data):
     """Show content of data object."""
-    groups = itertools.groupby(data, key=itemgetter('Component'))
+    groups = itertools.groupby(data, key=itemgetter('COMPONENT'))
     components = [name for name, _ in groups]
     for component in components:
         dataset = get_only(component, data)
