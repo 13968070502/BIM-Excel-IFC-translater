@@ -1,11 +1,27 @@
 """A file to import excel files."""
+import itertools
 from openpyxl import load_workbook
+from operator import itemgetter
+import tabulate
 
 from excel_utils import read_in_col, read_in_row
 
 
-def print_sheet_info():
-    """Print interesting details about a worksheet."""
+def get_only(bauteil, data):
+    return [x for x in data if x['Bauteil'] == bauteil]
+
+
+def show_data(data):
+    """Show content of data object."""
+    groups = itertools.groupby(data, key=itemgetter('Bauteil'))
+    bauteils = [name for name, _ in groups]
+    for bauteil in bauteils:
+        dataset = get_only(bauteil, data)
+        header = dataset[0].keys()
+        rows = [x.values() for x in dataset]
+        print(f'{bauteil}:')
+        print(tabulate.tabulate(rows, header, tablefmt='grid'))
+
 
 
 def import_from_excel(filename):
@@ -32,5 +48,6 @@ def import_from_excel(filename):
             for col_idx, header in enumerate(header_row):  # loop over columns
                 cell_value = ws.cell(row=row_idx+1, column=col_idx+1).value
                 this_row_data[header] = cell_value
-            print(this_row_data)
             data.append(this_row_data)
+
+    show_data(data)
