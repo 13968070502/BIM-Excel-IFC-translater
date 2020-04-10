@@ -7,19 +7,19 @@ import tabulate
 from excel_utils import read_in_col, read_in_row
 
 
-def get_only(bauteil, data):
-    return [x for x in data if x['Bauteil'] == bauteil]
+def get_only(component, data):
+    return [x for x in data if x['Component'] == component]
 
 
 def show_data(data):
     """Show content of data object."""
-    groups = itertools.groupby(data, key=itemgetter('Bauteil'))
-    bauteils = [name for name, _ in groups]
-    for bauteil in bauteils:
-        dataset = get_only(bauteil, data)
+    groups = itertools.groupby(data, key=itemgetter('Component'))
+    components = [name for name, _ in groups]
+    for component in components:
+        dataset = get_only(component, data)
         header = dataset[0].keys()
         rows = [x.values() for x in dataset]
-        print(f'{bauteil}:')
+        print(f'{component}:')
         print(tabulate.tabulate(rows, header, tablefmt='grid'))
 
 
