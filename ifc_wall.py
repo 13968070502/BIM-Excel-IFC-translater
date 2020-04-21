@@ -2,6 +2,8 @@
 # Class "wall" with some abilities
 
 class IfcWall:
+
+    """Abilities of the Class"""
     GlobalId = "Wall.001"
     Name = "Wall"
     Description = "vertical construction that bounds or subdivides spaces"
@@ -16,6 +18,7 @@ class IfcWall:
     # self bezieht sich immer auf die aktuelle Instanz
     # Konstruktor immer mit 2 Unterstrichen __
 
+    """Definition des Konstruktors"""
     def __init__(self, GlobalId="Wall001", Name="Wand", Description="vertical construction that bounds or subdivides spaces", ObjectType="Component",
     isTypedBy="IfcBuildingElement", ObjectPlacement=0.0, HasOpenings="Yes", length=5.0, width=0.2, height=3.0): # muss immer definiert werden
 
@@ -31,6 +34,7 @@ class IfcWall:
         self.width = width
         self.height = height
 
+    """Definition der Ausgabe"""
     def printWallAbilitys(self):
         print('GlobalID: ',self.GlobalId)
         print('Name: ', self.Name)
