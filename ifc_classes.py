@@ -7,7 +7,6 @@ class ifcroot:
         self.globalid = globalid
 
     def printifcrootabilities(self):
-        print('The class "ifcroot" has the following abilities:')
         print('GlobalID: ', self.globalid)
 
 
@@ -18,8 +17,7 @@ class ifcobjectdefinition(ifcroot):
         super(ifcobjectdefinition, self).__init__(globalid)
 
     def printifcobjectdefinitionabilities(self):
-        print('The class "ifcobjectdefinition" has the following abilities:')
-        print('GlobalID: ', self.globalid)
+        super(ifcwall, self).printifcrootabilities()
 
 
 
@@ -37,8 +35,7 @@ class ifcobject(ifcobjectdefinition):
         self.istypedby = istypedby
 
     def printifcobjectabilities(self):
-        print('The class "ifcobject" has the following abilities:')
-        print('GlobalID: ', self.globalid)
+        super(ifcwall, self).printifcobjectdefinitionabilities()
         print('Name: ', self.name)
         print('Description: ', self.description)
         print('ObjectType: ,', self.objecttype)
@@ -52,12 +49,7 @@ class ifcproduct(ifcobject):
         super(ifcproduct, self).__init__(globalid, name, description, objecttype, istypedby)
 
     def printifcproductabilities(self):
-        print('The class "ifcproduct" has the following abilities:')
-        print('GlobalID: ', self.globalid)
-        print('Name: ', self.name)
-        print('Description: ', self.description)
-        print('ObjectType: ,', self.objecttype)
-        print('IsTypedBy: ', self.istypedby)
+        super(ifcwall, self).printifcobjectabilities()
 
 
 
@@ -71,12 +63,7 @@ class ifcelement(ifcproduct):
         self.hasopenings = hasopenings
 
     def printifcelementabilities(self):
-        print('The class "ifcelement" has the following abilities:')
-        print('GlobalID: ', self.globalid)
-        print('Name: ', self.name)
-        print('Description: ', self.description)
-        print('ObjectType: ', self.objecttype)
-        print('IsTypedBy: ', self.istypedby)
+        super(ifcwall, self).printifcproductabilities()
         print('ObjectPlacement: ', self.objectplacement)
         print('HasOpenings: ', self.hasopenings)
 
@@ -88,14 +75,7 @@ class ifcbuildingelement(ifcelement):
         super(ifcbuildingelement, self).__init__(globalid, name, description, objecttype, istypedby, objectplacement, hasopenings)
 
     def printifcbuildingelementabilities(self):
-        print('The class "ifcbuildingelement" has the following abilities:')
-        print('GlobalID: ', self.globalid)
-        print('Name: ', self.name)
-        print('Description: ', self.description)
-        print('ObjectType: ', self.objecttype)
-        print('IsTypedBy: ', self.istypedby)
-        print('ObjectPlacement: ', self.objectplacement)
-        print('HasOpenings: ', self.hasopenings)
+        super(ifcwall, self).printifcelementabilities()
 
 
 
@@ -112,17 +92,10 @@ class ifcwall(ifcbuildingelement):
 
     def printifcwallabilities(self):
         print('The class "ifcwall" has the following abilities:')
-        print('GlobalID: ', self.globalid)
-        print('Name: ', self.name)
-        print('Description: ', self.description)
-        print('ObjectType: ', self.objecttype)
-        print('IsTypedBy: ', self.istypedby)
-        print('ObjectPlacement: ', self.objectplacement)
-        print('HasOpenings: ', self.hasopenings)
+        super(ifcwall, self).printifcbuildingelementabilities()
         print('Length: ', self.length)
         print('Width: ', self.width)
         print('height: ', self.height)
 
 dataifcwall = ifcwall('1234567890', 'Wall', 'vertical construction', 'Component', 'ifcbuildingelement', '0.0.0', 'Yes', '5.0', '0.2', '3.0')
 dataifcwall.printifcwallabilities()
-
