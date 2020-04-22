@@ -44,3 +44,19 @@ class ifcobject(ifcobjectdefinition):
 dataifcobject = ifcobject('1234567890', 'Wall', 'vertical construction', 'Component', 'ifcobjectdefinition')
 dataifcobject.printifcobjectabilities()
 
+
+class ifcproduct(ifcobject):
+
+    def __init__(self, globalid, name, description, objecttype, istypedby):
+        super(ifcproduct, self).__init__(globalid, name, description, objecttype, istypedby)
+
+    def printifcproductabilities(self):
+        print('GlobalID: ', self.globalid)
+        print('Name: ', self.name)
+        print('Description: ', self.description)
+        print('Objecttpe: ,', self.objecttype)
+        print('IsTypedBy: ', self.istypedby)
+
+
+class ifcelement(ifcproduct)
+
