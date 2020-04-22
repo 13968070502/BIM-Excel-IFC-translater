@@ -3,46 +3,46 @@
 class ifcwall:
 
     """Abilities of the Class"""
-    GlobalId = "Wall.001"
-    Name = "Wall"
-    Description = "vertical construction that bounds or subdivides spaces"
-    ObjectType = "Component"
-    isTypedBy = "IfcBuildingElement"
-    ObjectPlacement = "0.0.0"
-    HasOpenings = "True"
+    globalid = "Wall.001"
+    name = "Wall"
+    description = "vertical construction that bounds or subdivides spaces"
+    objecttype = "Component"
+    istypedby = "IfcBuildingElement"
+    objectplacement = "0.0.0"
+    hasopenings = "True"
     length = 5.0
     width = 0.2
     height = 3.0
 
     """Definition of the Constructor"""
-    def __init__(self, GlobalId="Wall001", Name="Wand", Description="vertical construction that bounds or subdivides spaces", ObjectType="Component",
-    isTypedBy="IfcBuildingElement", ObjectPlacement="0.0.0", HasOpenings="True", length=5.0, width=0.2, height=3.0): # muss immer definiert werden
+    def __init__(self, globalid="Wall001", name="Wand", description="vertical construction that bounds or subdivides spaces", objecttype="Component",
+    istypedby="IfcBuildingElement", objectplacement="0.0.0", hasopenings="True", length=5.0, width=0.2, height=3.0): # muss immer definiert werden
 
         """Definition of terms for the constructor"""
-        self.GlobalId = GlobalId
-        self.Name = Name
-        self.Description = Description
-        self.ObjectType = ObjectType
-        self.isTypedBy = isTypedBy
-        self.ObjectPlacement = ObjectPlacement
-        self.HasOpenings = HasOpenings
+        self.globalid = globalid
+        self.name = name
+        self.description = description
+        self.objecttype = objecttype
+        self.istypedby = istypedby
+        self.objectplacement = objectplacement
+        self.hasopenings = hasopenings
         self.length = length
         self.width = width
         self.height = height
 
     """Output definition"""
     def printwallabilitys(self):
-        print('GlobalID: ', self.GlobalId)
-        print('Name: ', self.Name)
-        print('Description: ', self.Description)
-        print('ObjectType: ', self.ObjectType)
-        print('Is typed by: ', self.isTypedBy)
-        print('Object Placement: ', self.ObjectPlacement)
-        print('Has Openings: ', self.HasOpenings)
+        print('GlobalID: ', self.globalid)
+        print('Name: ', self.name)
+        print('Description: ', self.description)
+        print('ObjectType: ', self.objecttype)
+        print('Is typed by: ', self.istypedby)
+        print('Object Placement: ', self.objectplacement)
+        print('Has Openings: ', self.hasopenings)
         print('Length: ', self.length)
         print('Width: ', self.width)
         print('Height: ', self.height)
 
 
-WallData = ifcwall("Wall.001", "Wall", "vertical construction that bounds or subdivides spaces", "Component", "IfcBuildingElement", "0.0.0", "True", 5.0, 0.2, 3.0)
-WallData.printwallabilitys()
+walldata = ifcwall("Wall.001", "Wall", "vertical construction that bounds or subdivides spaces", "Component", "IfcBuildingElement", "0.0.0", "True", 5.0, 0.2, 3.0)
+walldata.printwallabilitys()
