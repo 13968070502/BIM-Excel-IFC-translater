@@ -3,17 +3,17 @@
 class ifcroot:
 
     """Abilities of the Class"""
-    GlobalId = "Wall.001"
+    globalid = "1234567890"
 
     """Definition of the Constructor"""
-    def __init__(self, GlobalId1="Wall001"):
+    def __init__(self, globalid="Wall001"):
 
         """Definition of terms for the constructor"""
-        self.GlobalId1 = GlobalId1
+        self.globalid = globalid
 
     """Output definition"""
-    def printrootabilitys(self):
-        print('GlobalID1: ', self.GlobalId)
+    def printifcrootabilitys(self):
+        print('GlobalID: ', self.globalid)
 
-WallData = ifcroot("Wall.001")
-WallData.printrootabilitys()
+dataifcroot = ifcroot("1234567890")
+dataifcroot.printifcrootabilitys()

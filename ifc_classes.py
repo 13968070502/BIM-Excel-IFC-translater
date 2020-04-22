@@ -1,31 +1,20 @@
 """Class 'root' with all necessary abilities"""
 
 class ifcroot:
+    globalid = ""
 
-    """Abilities of the Class"""
-    GlobalId = "Wall.001"
+    def __init__(self, globalid):
+        self.globalid = globalid
 
-    """Definition of the Constructor"""
-    def __init__(self, GlobalId="Wall001"):
-
-        """Definition of terms for the constructor"""
-        self.GlobalId1 = GlobalId
-
-    """Output definition"""
     def printrootabilitys(self):
-        print('GlobalID: ', self.GlobalId)
+        print('GlobalID: ', self.globalid)
 
 
-"""Class 'wall' with an inherited ability"""
-class ifcwall(ifcroot):
+class ifcobjectdefinition(ifcroot):
 
-    """Abilities of the Class"""
-    name = "Wall"
+    def __init__(self, globalid):
+        super(ifcobjectdefinition, self).__init__(globalid)
 
-    """Definition of the Constructor"""
-    def __init__(self, GlobalId="Wall001", Name="Wand"):
-        super(ifcwall, self).__init__(GlobalId)
-        self.Name
+dataifcobjectdefinition = ifcobjectdefinition('1234567890')
 
-
-
+dataifcobjectdefinition.printglobalid()

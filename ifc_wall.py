@@ -2,8 +2,7 @@
 
 class ifcwall:
 
-    """Abilities of the Class"""
-    globalid = "Wall.001"
+    globalid = "1234567890"
     name = "Wall"
     description = "vertical construction that bounds or subdivides spaces"
     objecttype = "Component"
@@ -14,11 +13,9 @@ class ifcwall:
     width = 0.2
     height = 3.0
 
-    """Definition of the Constructor"""
-    def __init__(self, globalid="Wall001", name="Wand", description="vertical construction that bounds or subdivides spaces", objecttype="Component",
+    def __init__(self, globalid="1234567890", name="Wand", description="vertical construction that bounds or subdivides spaces", objecttype="Component",
     istypedby="IfcBuildingElement", objectplacement="0.0.0", hasopenings="True", length=5.0, width=0.2, height=3.0): # muss immer definiert werden
 
-        """Definition of terms for the constructor"""
         self.globalid = globalid
         self.name = name
         self.description = description
@@ -30,8 +27,7 @@ class ifcwall:
         self.width = width
         self.height = height
 
-    """Output definition"""
-    def printwallabilitys(self):
+    def printifcwallabilitys(self):
         print('GlobalID: ', self.globalid)
         print('Name: ', self.name)
         print('Description: ', self.description)
@@ -44,5 +40,5 @@ class ifcwall:
         print('Height: ', self.height)
 
 
-walldata = ifcwall("Wall.001", "Wall", "vertical construction that bounds or subdivides spaces", "Component", "IfcBuildingElement", "0.0.0", "True", 5.0, 0.2, 3.0)
-walldata.printwallabilitys()
+dataifcwall = ifcwall("1234567890", "Wall", "vertical construction that bounds or subdivides spaces", "Component", "IfcBuildingElement", "0.0.0", "True", 5.0, 0.2, 3.0)
+dataifcwall.printifcwallabilitys()
