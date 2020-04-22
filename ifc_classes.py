@@ -1,4 +1,4 @@
-"""Class 'root' with all necessary abilities"""
+"""Classes with inherited abilities"""
 
 class ifcroot:
     globalid = ""
@@ -6,8 +6,9 @@ class ifcroot:
     def __init__(self, globalid):
         self.globalid = globalid
 
-    def printabilities(self):
+    def printifcrootabilities(self):
         print('GlobalID: ', self.globalid)
+
 
 
 class ifcobjectdefinition(ifcroot):
@@ -15,7 +16,10 @@ class ifcobjectdefinition(ifcroot):
     def __init__(self, globalid):
         super(ifcobjectdefinition, self).__init__(globalid)
 
-dataifcobjectdefinition = ifcobjectdefinition('1234567890') # AUSFÜLLEN
+    def printifcobjectdefinitionabilities(self):
+        print('GlobalID: ', self.globalid)
+
+
 
 class ifcobject(ifcobjectdefinition):
     name = ""
@@ -24,11 +28,19 @@ class ifcobject(ifcobjectdefinition):
     istypedby = ""
 
     def __init__(self, globalid, name, description, objecttype, istypedby):
-        super(ifcobject, self).__init__(gloablid)
+        super(ifcobject, self).__init__(globalid)
         self.name = name
         self.description = description
         self.objecttype = objecttype
         self.istypedby = istypedby
 
-    def printabilities(self):
+    def printifcobjectabilities(self):
+        print('GlobalID: ', self.globalid)
+        print('Name: ', self.name)
+        print('Description: ', self.description)
+        print('Objecttpe: ,', self.objecttype)
+        print('IsTypedBy: ', self.istypedby)
+
+dataifcobject = ifcobject('1234567890', 'Wall', 'vertical construction', 'Component', 'ifcobjectdefinition')
+dataifcobject.printifcobjectabilities()
 

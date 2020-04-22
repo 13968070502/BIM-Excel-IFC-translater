@@ -13,7 +13,7 @@ class ifcwall:
     width = 0.2
     height = 3.0
 
-    def __init__(self, globalid="1234567890", name="Wand", description="vertical construction that bounds or subdivides spaces", objecttype="Component",
+    def __init__(self, globalid="1234567890", name="Wand", description="vertical construction", objecttype="Component",
     istypedby="IfcBuildingElement", objectplacement="0.0.0", hasopenings="True", length=5.0, width=0.2, height=3.0): # muss immer definiert werden
 
         self.globalid = globalid
