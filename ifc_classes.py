@@ -10,7 +10,7 @@ class ifcroot:
         print('GlobalID: ', self.globalid)
 
 
-
+"""IfcIbjectDefinition"""
 class ifcobjectdefinition(ifcroot):
 
     def __init__(self, globalid):
@@ -20,7 +20,7 @@ class ifcobjectdefinition(ifcroot):
         super(ifcwall, self).printifcrootabilities()
 
 
-
+"""IfcObject"""
 class ifcobject(ifcobjectdefinition):
     name = ""
     description = ""
@@ -42,7 +42,7 @@ class ifcobject(ifcobjectdefinition):
         print('IsTypedBy: ', self.istypedby)
 
 
-
+"""IfcProduct"""
 class ifcproduct(ifcobject):
 
     def __init__(self, globalid, name, description, objecttype, istypedby):
@@ -52,7 +52,7 @@ class ifcproduct(ifcobject):
         super(ifcwall, self).printifcobjectabilities()
 
 
-
+"""IfcElement"""
 class ifcelement(ifcproduct):
     objectplacement = ""
     hasopenings = ""
@@ -68,7 +68,7 @@ class ifcelement(ifcproduct):
         print('HasOpenings: ', self.hasopenings)
 
 
-
+"""ifcBuildingElement"""
 class ifcbuildingelement(ifcelement):
 
     def __init__(self, globalid, name, description, objecttype, istypedby, objectplacement, hasopenings,):
@@ -78,7 +78,7 @@ class ifcbuildingelement(ifcelement):
         super(ifcwall, self).printifcelementabilities()
 
 
-
+"""IfcWall"""
 class ifcwall(ifcbuildingelement):
     length = ""
     width = ""
