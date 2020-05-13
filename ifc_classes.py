@@ -10,7 +10,7 @@ class ifcroot:
         print('GlobalID: ', self.globalid)
 
 
-"""IfcIbjectDefinition"""
+"""IfcObjectDefinition"""
 class ifcobjectdefinition(ifcroot):
 
     def __init__(self, globalid):
@@ -38,7 +38,7 @@ class ifcobject(ifcobjectdefinition):
         super(ifcwall, self).printifcobjectdefinitionabilities()
         print('Name: ', self.name)
         print('Description: ', self.description)
-        print('ObjectType: ,', self.objecttype)
+        print('ObjectType: ', self.objecttype)
         print('IsTypedBy: ', self.istypedby)
 
 
@@ -95,7 +95,7 @@ class ifcwall(ifcbuildingelement):
         super(ifcwall, self).printifcbuildingelementabilities()
         print('Length: ', self.length)
         print('Width: ', self.width)
-        print('height: ', self.height)
+        print('Height: ', self.height)
 
-dataifcwall = ifcwall('1234567890', 'Wall', 'vertical construction', 'Component', 'ifcbuildingelement', '0.0.0', 'Yes', '5.0', '0.2', '3.0')
+dataifcwall = ifcwall('1234567890123456789012', 'Wall', 'vertical construction', 'Component', 'ifcbuildingelement', '0.0.0', 'Yes', '5.0', '0.2', '3.0')
 dataifcwall.printifcwallabilities()

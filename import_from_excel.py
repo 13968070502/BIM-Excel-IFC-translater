@@ -23,7 +23,6 @@ def show_data(data):
         print(tabulate.tabulate(rows, header, tablefmt='grid'))
 
 
-
 def import_from_excel(filename):
     """Read an excel file."""
     if not filename:
