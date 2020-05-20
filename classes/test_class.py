@@ -1,43 +1,47 @@
-# Definition of the class 'wall' with inherited abilities
+# Definition of the class 'wall' with some abilities
 
-class wall:
+class Wall:
     name = ""
+    designation = ""
     material = ""
     length = ""
     width = ""
     height = ""
 
-    def __init__(self, name, material, length, width, height):
+    def __init__(self, name, designation, material, length, width, height):
         self.name = name
+        self.designation = designation
         self.material = material
         self.length = length
         self.width = width
         self.height = height
 
 
-# Instantiation of the class 'wall' to class 'concretewall'
+# Instantiation of the class 'Wall' to class 'ReinforcedConcreteWall' with inherited abilities
 
-class concretewall(wall):
-    compressivestrengthclass = ""
-    exposureclass = ""
+class ReinforcedConcreteWall(Wall):
+    structure = ""
+    function = ""
 
-    def __init__(self, name, material, length, width, height, compressivestrengthclass, exposureclass):
-        super(concretewall, self).__init__(name, material, length, width, height)
-        self.compressivestrengthclass = compressivestrengthclass
-        self.exposureclass = exposureclass
+    def __init__(self, name, designation, material, length, width, height, structure, function):
+        super(ReinforcedConcreteWall, self).__init__(name, designation, material, length, width, height)
+        self.structure = structure
+        self.function = function
 
+# Method to print attributes of the class
 
     def printattributes(self):
-        super(concretewall, self)
+        super(ReinforcedConcreteWall, self)
         print('Name: ', self.name)
+        print('Designation: ', self.designation)
         print('Material: ', self.material)
         print('Length: ', self.length)
         print('Width: ', self.width)
         print('Height: ', self.height)
-        print('Compressive strength class: ', self.compressivestrengthclass)
-        print('Exposure class: ', self.exposureclass)
+        print('Structure: ', self.structure)
+        print('Function: ', self.function)
 
 # Data output
 
-dataconcretewall = concretewall('Concrete wall','Concrete','5,00m','0,20m','3,00m','C25/30','XC4')
-dataconcretewall.printattributes()
+get_data = ReinforcedConcreteWall('Reinforced Concrete Wall', 'STB300', 'reinforced concrete','5,00m','0,30m','2,70m','load-bearing element','outside')
+get_data.printattributes()

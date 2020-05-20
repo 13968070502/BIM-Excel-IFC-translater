@@ -1,4 +1,4 @@
-"""Class 'wall' with all necessary abilities"""
+"""Class 'ifcwall' with all necessary abilities"""
 
 class ifcwall:
 
