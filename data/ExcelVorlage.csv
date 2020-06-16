@@ -1,4 +1,4 @@
-COMPONENT;LENGTH [m];DEPTH [m];HEIGHT [m];MATERIAL
+component;length;depth;height;material
 wall;5;0,2;3;concrete
 wall;5;0,4;3;reinforced concrete
 wall;5;0,6;3;wood
