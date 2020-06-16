@@ -54,7 +54,7 @@ class IfcObject(IfcObjectDefinition):
 """IfcProduct"""
 class IfcProduct(IfcObject):
 
-    def __init__(self, , GlobalId, Name, Description, ObjectType, IsTypedBy):
+    def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy):
         super(IfcProduct, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy)
 
     def print_IfcProduct_abilities(self):
