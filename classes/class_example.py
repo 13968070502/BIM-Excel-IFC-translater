@@ -30,7 +30,7 @@ class ReinforcedConcreteWall(Wall):
 
 # Method to print attributes of the class
 
-    def printattributes(self):
+    def print_attributes(self):
         super(ReinforcedConcreteWall, self)
         print('Name: ', self.name)
         print('Designation: ', self.designation)

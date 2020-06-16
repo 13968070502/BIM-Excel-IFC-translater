@@ -6,7 +6,7 @@ class ifcroot:
     def __init__(self, globalid):
         self.globalid = globalid
 
-    def printifcrootabilities(self):
+    def print_ifcroot_abilities(self):
         print('GlobalID: ', self.globalid)
 
 
@@ -16,7 +16,7 @@ class ifcobjectdefinition(ifcroot):
     def __init__(self, globalid):
         super(ifcobjectdefinition, self).__init__(globalid)
 
-    def printifcobjectdefinitionabilities(self):
+    def print_ifcobjectdefinition_abilities(self):
         super(ifcwall, self).printifcrootabilities()
 
 
@@ -34,7 +34,7 @@ class ifcobject(ifcobjectdefinition):
         self.objecttype = objecttype
         self.istypedby = istypedby
 
-    def printifcobjectabilities(self):
+    def print_ifcobject_abilities(self):
         super(ifcwall, self).printifcobjectdefinitionabilities()
         print('Name: ', self.name)
         print('Description: ', self.description)
@@ -48,6 +48,6 @@ class ifcproduct(ifcobject):
     def __init__(self, globalid, name, description, objecttype, istypedby):
         super(ifcproduct, self).__init__(globalid, name, description, objecttype, istypedby)
 
-    def printifcproductabilities(self):
+    def print_ifcproduct_abilities(self):
         super(ifcwall, self).printifcobjectabilities()
 

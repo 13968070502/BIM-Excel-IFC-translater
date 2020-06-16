@@ -48,7 +48,7 @@ class ifcproduct(ifcobject):
     def __init__(self, globalid, name, description, objecttype, istypedby):
         super(ifcproduct, self).__init__(globalid, name, description, objecttype, istypedby)
 
-    def printifcproductabilities(self):
+    def print_ifcproduct_abilities(self):
         super(ifcwall, self).printifcobjectabilities()
 
 
@@ -62,7 +62,7 @@ class ifcelement(ifcproduct):
         self.objectplacement = objectplacement
         self.hasopenings = hasopenings
 
-    def printifcelementabilities(self):
+    def print_ifcelement_abilities(self):
         super(ifcwall, self).printifcproductabilities()
         print('ObjectPlacement: ', self.objectplacement)
         print('HasOpenings: ', self.hasopenings)

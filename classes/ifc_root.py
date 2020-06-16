@@ -12,7 +12,7 @@ class ifcroot:
         self.globalid = globalid
 
     """Output definition"""
-    def printifcrootabilitys(self):
+    def print_ifcroot_abilitys(self):
         print('GlobalID: ', self.globalid)
 
 dataifcroot = ifcroot("1234567890")

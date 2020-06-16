@@ -90,7 +90,7 @@ class ifcwall(ifcbuildingelement):
         self.width = width
         self.height = height
 
-    def printifcwallabilities(self):
+    def print_ifcwall_abilities(self):
         print('The class "ifcwall" has the following abilities:')
         super(ifcwall, self).printifcbuildingelementabilities()
         print('Length: ', self.length)
