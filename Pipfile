@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 openpyxl = "*"
 tabulate = "*"
+numpy = "*"
+pandas = "*"
 
 [dev-packages]
 
