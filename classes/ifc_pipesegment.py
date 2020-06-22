@@ -1,3 +1,5 @@
+"""Inheritance path"""
+
 # IfcRoot
 # IfcObjectDefinition
 # IfcObject

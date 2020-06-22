@@ -1,30 +1,44 @@
 """A file to import and write csv files."""
-# Import csv file
 
+# Import csv file
 import csv
 path = 'data\Input_Results_TGA_MASTER.csv'
-num = 0
-array = []
 
-with open(path, 'r', newline='') as read_obj:
-    # pass the file object to reader() to get the reader object
-    csv_reader = csv.reader(read_obj, delimiter=';')
-    # Pass reader object to list() to get a list of lists
-    list_of_rows = list(csv_reader)
+# Define headers
+Object=0; Object_Id=1; IFC_Element=2; Diameter=3; Material=4; Pipe_Color=5; Piping_type=6; H_V=7;
+Total_vertices=8; X_min=9; Y_min=10; X_max=11; Y_max=12; Project=13; Building=14; Floor=15; Room=16
 
-for s in list_of_rows:
+# Read csv
+with open(path, 'r', newline='') as read_csv:
+
+    # pass file objects to reader() to get the reader object
+    csv_reader = csv.reader(read_csv, delimiter=';')
+
+    # Pass reader object to list to get list of lists
+    data = list(csv_reader)
+
+# Print whole data
+for s in data:
     print(*s)
 
-for item in list_of_rows[0]:
-    print (item)
-    array.append([item + '=' + str(num)])
-    num += 1
+# Print specific value
+print(data[3][Object_Id])
 
-print (array)
 
-Object=0; Object_Id=1; IFC_Element=2; Diameter=3
 
-print (list_of_rows[3][1])
+
+
+
+
+
+
+
+#for item in list_of_rows[0]:
+#    print (item)
+#    array.append([item + '=' + str(num)])
+#    num += 1
+
+#print (list_of_rows[3][1]) #Ausgabe Zeile 3 Header 1
 
 
 

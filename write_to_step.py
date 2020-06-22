@@ -1,45 +1,73 @@
 """Contains the functionality to write the data out in step format."""
 
+
 def write_to_step(data):
     """Write data in step format."""
 
 
-#read and write data
-#Constant text elements of an IFC-File in STEP-format
-
+# Constant text elements of an IFC-File in STEP-format
 ISO = 'ISO-10303-21'
 HEADER = 'HEADER;'
-FILE_DESCRIPTION = 'FILE_DECRIPTION(();'
-FILE_NAME = 'FILE_NAME();'
-FILE_SCHEMA = 'FILE_SCHEMA ();'
+FILE_DESCRIPTION = 'FILE_DESCRIPTION(('
+END_SENTENCE = ');'
+FILE_NAME = 'FILE_NAME('
+FILE_SCHEMA = 'FILE_SCHEMA ('
 ENDSEC = 'ENDSEC;'
-
 DATA = 'DATA;'
 END_ISO = 'END-ISO-10303-21;'
 
-#construct STEP-File
+# Data created by Python
+TIMESTAMP = ''
+AUTHOR = 'Wellenhofer'
+IFC_VERSION = 'IFC4'
 
-# w = schreiben, r = lesen, a = append
+# Imported Data from CSV-File
+
+
+
+# Construction of STEP-File
 with open('STEP-file.ifc', 'w') as f:
     f.write(ISO + '\n')
     f.write(HEADER + '\n')
-    f.write(FILE_DESCRIPTION + '\n')
-    f.write(FILE_NAME + '\n')
-    f.write(FILE_SCHEMA + '\n')
+    f.write(FILE_DESCRIPTION + END_SENTENCE + '\n')
+    f.write(FILE_NAME + END_SENTENCE + '\n')
+    f.write(FILE_SCHEMA + END_SENTENCE + '\n')
     f.write(ENDSEC + '\n')
     f.write(DATA + '\n')
-    f.write(END_ISO+ '\n')
 
-step_new = ""
+    # Placement with local coordinates:
+
+    # Declaration of Units:
+
+    # Geometric representations:
+
+    # Assign global coordinates to 3D representation context:
+
+    # Assign contexts, units to project:
+
+    # 3D-Body-context:
+
+    # product shape definition, placement and instancing:
+
+    # Assign properties to pipe:
+
+    # Assign elements to project:
+
+
+    f.write(ENDSEC + '\n')
+    f.write(END_ISO + '\n')
+
+step_file = ""
 
 with open('STEP-file.ifc', 'r') as f:
-    step_new += f.readline()
-    step_new += f.readline()
-    step_new += f.readline()
-    step_new += f.readline()
-    step_new += f.readline()
-    step_new += f.readline()
-    step_new += f.readline()
-    step_new += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
+    step_file += f.readline()
 
-print(step_new)
+
+print(step_file)
