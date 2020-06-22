@@ -9,4 +9,4 @@ def create_timestamp():
     # Convert timestamp to string
     timestampStr = timestamp.strftime("%d-%m-%YT%H:%M:%S")
 
-    print(timestampStr)
+    return timestampStr

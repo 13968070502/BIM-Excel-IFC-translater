@@ -39,4 +39,3 @@ def split(g):
 
 def create_GUID():
     return compress(uuid.uuid4().hex)
-

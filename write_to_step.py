@@ -1,27 +1,30 @@
 """Contains the functionality to write the data out in step format."""
 
-from step.time_stamp import create_timestamp
+from import_from_csv import get_value
+from create_timestamp import create_timestamp
+
 
 def write_to_step(data):
     """Write data in step format."""
 
 
 # Constant text elements of an IFC-File in STEP-format
-ISO = 'ISO-10303-21'
-HEADER = 'HEADER;'
-FILE_DESCRIPTION = 'FILE_DESCRIPTION(('
-END_ROW = ');'
-FILE_NAME = 'FILE_NAME('
-FILE_SCHEMA = 'FILE_SCHEMA ('
-ENDSEC = 'ENDSEC;'
-DATA = 'DATA;'
-END_ISO = 'END-ISO-10303-21;'
+ISO = "ISO-10303-21"
+HEADER = "HEADER;"
+FILE_DESCRIPTION = "FILE_DESCRIPTION (("
+END_ROW = "); "
+FILE_NAME = "FILE_NAME ("
+FILE_SCHEMA = "FILE_SCHEMA (('"
+ENDSEC = "ENDSEC;"
+DATA = "DATA;"
+END_ISO = "END-ISO-10303-21;"
+
 
 # Data created by Python
 TIMESTAMP = create_timestamp()
-AUTHOR = 'Wellenhofer'
-IFC_VERSION = 'IFC4'
-IMPLEMENTATION_LEVEL = '2;1'
+AUTHOR = "Wellenhofer"
+IFC_VERSION = "IFC4"
+IMPLEMENTATION_LEVEL = "2;1"
 
 
 # Imported Data from CSV-File
@@ -33,9 +36,9 @@ IMPLEMENTATION_LEVEL = '2;1'
 with open('STEP-file.ifc', 'w') as f:
     f.write(ISO + '\n')
     f.write(HEADER + '\n')
-    f.write(FILE_DESCRIPTION + END_ROW + '\n')
-    f.write(FILE_NAME + TIMESTAMP + END_ROW + '\n')
-    f.write(FILE_SCHEMA + END_ROW + '\n')
+    f.write(FILE_DESCRIPTION + "'" + get_value(1,0) + "'), '" + IMPLEMENTATION_LEVEL + "'"+ END_ROW + '\n')
+    f.write(FILE_NAME + "'', '" + TIMESTAMP + "', ('" + AUTHOR + "'), (''), '', '', ''" + END_ROW + '\n')
+    f.write(FILE_SCHEMA + IFC_VERSION + "')" + END_ROW + '\n')
     f.write(ENDSEC + '\n')
     f.write(DATA + '\n')
 

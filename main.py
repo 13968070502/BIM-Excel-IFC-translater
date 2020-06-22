@@ -1,8 +1,5 @@
 """The main file for the program."""
-import import_from_excel
-import import_from_csv
-import translate_to_ifc
-import write_to_step
+from Import import import_from_excel
 
 
 #def main():

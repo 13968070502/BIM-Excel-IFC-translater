@@ -1,18 +1,25 @@
-"""Inheritance path"""
+"""Ifc class model"""
+
+from create_GUID import create_GUID
+from import_from_csv import get_value
+
+"""Inheritance path of IfcPipeSegment"""
 
 # IfcRoot
-# IfcObjectDefinition
-# IfcObject
-# IfcProduct
-# IfcElement
-# IfcDistributionElement
-# IfcDistributionFlowElement
-# IfcFlowSegment
-# IfcPipeSegment
+#   IfcObjectDefinition#
+#       IfcObject
+#           IfcProduct
+#               IfcElement
+#                   IfcDistributionElement
+#                       IfcDistributionFlowElement
+#                           IfcFlowSegment
+#                               IfcPipeSegment
 
 """Definition of class IfcPipeSegment with inherited abilities"""
+
+
 class IfcRoot:
-    GlobalId = ""
+    GlobalId = ''
 
     def __init__(self, GlobalId):
         self.GlobalId = GlobalId
@@ -22,6 +29,8 @@ class IfcRoot:
 
 
 """IfcObjectDefinition"""
+
+
 class IfcObjectDefinition(IfcRoot):
 
     def __init__(self, GlobalId):
@@ -32,6 +41,8 @@ class IfcObjectDefinition(IfcRoot):
 
 
 """IfcObject"""
+
+
 class IfcObject(IfcObjectDefinition):
     Name = ""
     Description = ""
@@ -54,6 +65,8 @@ class IfcObject(IfcObjectDefinition):
 
 
 """IfcProduct"""
+
+
 class IfcProduct(IfcObject):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy):
@@ -64,6 +77,8 @@ class IfcProduct(IfcObject):
 
 
 """IfcElement"""
+
+
 class IfcElement(IfcProduct):
     ObjectPlacement = ""
     HasOpenings = ""
@@ -80,44 +95,62 @@ class IfcElement(IfcProduct):
 
 
 """IfcDistributionElement"""
+
+
 class IfcDistributionElement(IfcElement):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
-        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings)
+        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy,
+                                                     ObjectPlacement, HasOpenings)
 
     def print_IfcDistributionElement_abilities(self):
         super(IfcDistributionElement, self).print_IfcElement_abilities()
 
 
 """IfcDistributionFlowElement"""
+
+
 class IfcDistributionFlowElement(IfcDistributionElement):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
-        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings)
+        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy,
+                                                     ObjectPlacement, HasOpenings)
 
     def print_IfcDistributionFlowElement_abilities(self):
         super(IfcDistributionFlowElement, self).print_IfcDistributionElement_abilities()
 
 
-"""IfcFlowSegment"""
-class IfcFlowSegment(IfcDistributionFlowElement):
+"""IfcFlowElement"""
+
+
+class IfcFlowElement(IfcDistributionFlowElement):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
-        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings)
+        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy,
+                                                     ObjectPlacement, HasOpenings)
 
-    def print_IfcFlowSegment_abilities(self):
-        super(IfcFlowSegment, self).print_IfcDistributionElement_abilities()
+    def print_IfcFlowElement_abilities(self):
+        super(IfcFlowElement, self).print_IfcDistributionElement_abilities()
 
 
-"""IfcPipeSegment"""
-class IfcPipeSegment(IfcFlowSegment):
+"""IfcPipeElement"""
+
+
+class IfcPipeElement(IfcFlowElement):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
-        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings)
+        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy,
+                                                     ObjectPlacement, HasOpenings)
 
-    def print_IfcPipeSegment_abilities(self):
-        super(IfcPipeSegment, self).print_IfcDistributionElement_abilities()
+    def print_IfcPipeElement_abilities(self):
+        super(IfcPipeElement, self).print_IfcDistributionElement_abilities()
 
-data_IfcPipeSegment = IfcPipeSegment('1234567890123456789012', 'Pipe', 'Heating', 'Flow Element', 'IfcFlowSegment', '0.0.0', 'No')
-data_IfcPipeSegment.print_IfcPipeSegment_abilities()
 
+# Instanciation - creating an object out of a class
+PipeElement = IfcPipeElement(create_GUID(), get_value(1, 0), get_value(1, 6), get_value(1, 2), 'IfcFlowElement', '0.0.0', 'No')
+
+PipeElement.print_IfcPipeElement_abilities()
+
+# Define headers
+# Object=0; Object_Id=1; IFC_Element=2; Diameter=3; Material=4; Pipe_Color=5; Piping_type=6; H_V=7;
+# Total_vertices=8; X_min=9; Y_min=10; X_max=11; Y_max=12; Project=13; Building=14; Floor=15; Room=16

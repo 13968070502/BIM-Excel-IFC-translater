@@ -2,11 +2,10 @@
 
 # Import csv file
 import csv
-path = 'data\Input_Results_TGA_MASTER.csv'
+path = 'data/Input_Results_TGA_MASTER.csv'
 
 # Define headers
-Object=0; Object_Id=1; IFC_Element=2; Diameter=3; Material=4; Pipe_Color=5; Piping_type=6; H_V=7;
-Total_vertices=8; X_min=9; Y_min=10; X_max=11; Y_max=12; Project=13; Building=14; Floor=15; Room=16
+File_Name=0; Object=1; Object_Id=2; IFC_Element=3; Diameter=4; Elevation=5; Pipe_Usage=6; Pipe_type=7; X_min=8; Y_min=9; X_max=10; Y_max=11; Project=12; Building=13; Floor=14; Room=15
 
 # Read csv
 with open(path, 'r', newline='') as read_csv:
@@ -18,12 +17,12 @@ with open(path, 'r', newline='') as read_csv:
     data = list(csv_reader)
 
 # Print whole data
-for s in data:
-    print(*s)
+#for s in data:
+#    print(*s)
 
-# Print specific value
-print(data[3][Object_Id])
-
+def get_value(object, attribute):
+    # Return specific value
+    return data[object][attribute]
 
 
 
