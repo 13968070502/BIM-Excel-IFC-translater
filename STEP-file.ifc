@@ -1,8 +1,11 @@
 ISO-10303-21
 HEADER;
 FILE_DESCRIPTION (('MA_TGA'), '2;1'); 
-FILE_NAME ('', '22-06-2020T16:44:05', ('Wellenhofer'), (''), '', '', ''); 
+
+FILE_NAME ('', '22-06-2020T18:14:57', ('Wellenhofer'), (''), '', '', ''); 
+
 FILE_SCHEMA (('IFC4')); 
+
 ENDSEC;
 DATA;
 ENDSEC;
