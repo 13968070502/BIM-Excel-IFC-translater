@@ -7,6 +7,8 @@ def create_timestamp():
     # Creation of timestamp
     timestamp = datetime.now()
     # Convert timestamp to string
-    timestampStr = timestamp.strftime("%d-%m-%YT%H:%M:%S")
+    timestampStr = timestamp.strftime("%Y-%m-%dT%H:%M:%S")
+
+    #timestampStr = timestamp.strftime("%d-%m-%YT%H:%M:%S")
 
     return timestampStr
