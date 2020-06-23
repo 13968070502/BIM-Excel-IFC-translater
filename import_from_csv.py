@@ -29,9 +29,6 @@ def get_value(object, attribute):
 
 
 
-
-
-
 #for item in list_of_rows[0]:
 #    print (item)
 #    array.append([item + '=' + str(num)])

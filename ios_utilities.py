@@ -16,8 +16,22 @@ inner_radius = 290
 # Helper function definitions
 # Creates an IfcAxis2Placement3D from Location, Axis and RefDirection specified as Python tuples
 
-# IfcCircleProfileDef
-# IfcCircleHollowProfileDef
+# rotate solid
+def create_ifcrevolvedareasolid(ifcfile, point_list, ifcaxis2placement, rotate_dir , rotation):
+    polyline = create_ifcpolyline(ifcfile, point_list)
+    ifcclosedprofile = ifcfile.createIfcArbitraryClosedProfileDef("AREA", None, polyline)
+    ifcdir = ifcfile.createIfcDirection(rotate_dir)
+    ifcrevolvedareasolid = ifcfile.createIfcRevolvedAreaSolid(ifcclosedprofile, ifcaxis2placement, ifcdir, rotation)
+    return ifcrevolvedareasolid
+
+
+# rotation axis
+def create_ifcaxis1placement(ifcfile, point=0, dir2=X):
+    point = ifcfile.createIfcCartesianPoint(point)
+    dir2 = ifcfile.createIfcDirection(dir2)
+    axis1placement = ifcfile.createIfcAxis1Placement(point, dir2)
+    return axis1placement
+
 
 def create_ifcaxis2placement(ifcfile, point=O, dir1=Z, dir2=X):
     point = ifcfile.createIfcCartesianPoint(point)
