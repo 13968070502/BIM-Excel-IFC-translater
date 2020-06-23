@@ -2,7 +2,7 @@
 
 # Import csv file
 import csv
-path = 'data/Input_Results_TGA_MASTER.csv'
+path = 'data/Pipe_system.csv'
 
 # Define headers
 File_Name=0; Object=1; Object_Id=2; IFC_Element=3; Diameter=4; Elevation=5; Pipe_Usage=6; Pipe_type=7; X_min=8; Y_min=9; X_max=10; Y_max=11; Project=12; Building=13; Floor=14; Room=15
