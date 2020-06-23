@@ -2,11 +2,15 @@ import uuid
 import time
 import tempfile
 import ifcopenshell
-from ios_utilities import create_ifcaxis2placement, create_ifclocalplacement, create_ifcpolyline, create_ifcextrudedareasolid
-
-
-# Create GUID
-create_guid = lambda: ifcopenshell.guid.compress(uuid.uuid1().hex)
+from ios_utilities \
+    import \
+    create_ifcaxis2placement, \
+    create_ifclocalplacement, \
+    create_ifcpolyline, \
+    create_ifcextrudedareasolid, \
+    create_ifcaxis1placement, \
+    create_guid, \
+    create_ifcrevolvedareasolid
 
 
 # Definition of general file information
@@ -82,31 +86,20 @@ container_site = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "S
 container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "Project Container", None, project, [site])
 
 
-# Wall creation: Define the Wall shape as a polyline axis and an extruded area solid
-wall_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
-
+# Create shape of IfcPipeSegment 'Pipe' by rotating an area with IfcRevolvedAreaSolid
+pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
 polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)])
 axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
 
-extrusion_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0))
-point_list_extrusion_area = [(0.0, -0.1, 0.0), (5.0, -0.1, 0.0), (5.0, 0.1, 0.0), (0.0, 0.1, 0.0), (0.0, -0.1, 0.0)]
-solid = create_ifcextrudedareasolid(ifcfile, point_list_extrusion_area, extrusion_placement, (0.0, 0.0, 1.0), 3.0)
+rotation_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0))
+rotation_axis = create_ifcaxis1placement(ifcfile, (0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
+point_list_rotation_area = [(0.0, 0.3, 0.0), (0.0, 0.4, 0.0), (5.0, 0.4, 0.0), (5.0, 0.3, 0.0), (0.0, 0.3, 0.0)]
+solid = create_ifcrevolvedareasolid(ifcfile, point_list_rotation_area, rotation_placement, (0.0, 0.0, 1.0), 360)
 body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
 
 product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
 
-wall = ifcfile.createIfcFlowSegment(create_guid(), owner_history, "IfcFlowSegment", "Part of distribution system", None, wall_placement, product_shape, None)
-
-# Pipe creation: Define the Pipe shape as a polyline axis and an extruded area solid
-
-pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
-
-
-
-
-
-
-
+pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, "IfcPipeSegment", "Part of distribution system", None, pipe_placement, product_shape, None)
 
 
 # Define and associate the pipe material
@@ -115,33 +108,6 @@ material_layer = ifcfile.createIfcMaterialLayer(material, 0.2, None)
 material_layer_set = ifcfile.createIfcMaterialLayerSet([material_layer], None)
 material_layer_set_usage = ifcfile.createIfcMaterialLayerSetUsage(material_layer_set, "AXIS2", "POSITIVE", -0.1)
 ifcfile.createIfcRelAssociatesMaterial(create_guid(), owner_history, RelatedObjects=[pipe], RelatingMaterial=material_layer_set_usage)
-
-
-# Create and assign property set
-property_values = [
-    ifcfile.createIfcPropertySingleValue("Reference", "Reference",
-                                         ifcfile.create_entity("IfcText", "Describe the Reference"), None),
-    ifcfile.createIfcPropertySingleValue("IsExternal", "IsExternal", ifcfile.create_entity("IfcBoolean", True), None),
-    ifcfile.createIfcPropertySingleValue("ThermalTransmittance", "ThermalTransmittance",
-                                         ifcfile.create_entity("IfcReal", 2.569), None),
-    ifcfile.createIfcPropertySingleValue("IntValue", "IntValue", ifcfile.create_entity("IfcInteger", 2), None)
-]
-property_set = ifcfile.createIfcPropertySet(create_guid(), owner_history, "Pset_PipeCommon", None, property_values)
-ifcfile.createIfcRelDefinesByProperties(create_guid(), owner_history, None, None, [pipe], property_set)
-
-
-# Add quantity information
-quantity_values = [
-    ifcfile.createIfcQuantityLength("Length", "Length of the pipe", None, 5.0),
-    ifcfile.createIfcQuantityArea("Area", "Area of the front face", None, 5.0 * solid.Depth),
-    ifcfile.createIfcQuantityVolume("Volume", "Volume of the pipe", None,
-                                    5.0 * solid.Depth * material_layer.LayerThickness)
-]
-element_quantity = ifcfile.createIfcElementQuantity(create_guid(), owner_history, "BaseQuantities", None, None,
-                                                    quantity_values)
-ifcfile.createIfcRelDefinesByProperties(create_guid(), owner_history, None, None, [pipe], element_quantity)
-
-
 
 
 # Relate the pipe to the building storey
