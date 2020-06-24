@@ -11,10 +11,11 @@ from ios_utilities \
     create_ifcaxis1placement, \
     create_guid, \
     create_ifcrevolvedareasolid
+from import_from_csv import get_value
 
 
 # Definition of general file information
-filename = "pipe_system.ifc"
+filename = get_value(1,0) + ".ifc"
 timestamp = time.time()
 timestring = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(timestamp))
 creator = "Alexander Wellenhofer"
@@ -86,7 +87,7 @@ container_site = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "S
 container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "Project Container", None, project, [site])
 
 
-# Create shape of IfcPipeSegment 'Pipe' by rotating an area with IfcRevolvedAreaSolid
+# Create shape of IfcObject by rotating an area with IfcRevolvedAreaSolid
 pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
 polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)])
 axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
@@ -94,23 +95,41 @@ axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Cur
 rotation_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0))
 rotation_axis = create_ifcaxis1placement(ifcfile, (0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
 point_list_rotation_area = [(0.0, 0.3, 0.0), (0.0, 0.4, 0.0), (5.0, 0.4, 0.0), (5.0, 0.3, 0.0), (0.0, 0.3, 0.0)]
-solid = create_ifcrevolvedareasolid(ifcfile, point_list_rotation_area, rotation_placement, (0.0, 0.0, 1.0), 360)
+solid = create_ifcrevolvedareasolid(ifcfile, point_list_rotation_area, rotation_placement, (0.0, 0.0, 1.0), 360) # 360° = Rotation
 body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
 
 product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
 
-pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, "IfcPipeSegment", "Part of distribution system", None, pipe_placement, product_shape, None)
+pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, get_value(1,1), get_value(1,8), get_value(1,7), pipe_placement, product_shape, get_value(1,2))
 
+# --------------------------------------------------
 
-# Define and associate the pipe material
-material = ifcfile.createIfcMaterial("pipe material")
+# Create shape of IfcObject by rotating an area with IfcRevolvedAreaSolid
+# pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
+# polyline = create_ifcpolyline(ifcfile, [(get_value(1,10), get_value(1,12), 0.0), (get_value(1,11), get_value(1,13), 0.0)])
+# axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
+
+# rotation_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0))
+# rotation_axis = create_ifcaxis1placement(ifcfile, (0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
+# point_list_rotation_area = [(0.0, get_value(1,5), 0.0), (0.0, get_value(1,4), 0.0), (get_value(1,11), get_value(1,4), 0.0), (get_value(1,11), get_value(1,5), 0.0), (0.0, get_value(1,5), 0.0)]
+# solid = create_ifcrevolvedareasolid(ifcfile, point_list_rotation_area, rotation_placement, (0.0, 0.0, 1.0), 360) # 360° = Rotation
+# body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
+
+# product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
+
+# pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, get_value(1,1), get_value(1,8), get_value(1,7), pipe_placement, product_shape, get_value(1,2))
+
+# --------------------------------------------------
+
+# Define and associate the object material
+material = ifcfile.createIfcMaterial(get_value(1,9))
 material_layer = ifcfile.createIfcMaterialLayer(material, 0.2, None)
 material_layer_set = ifcfile.createIfcMaterialLayerSet([material_layer], None)
 material_layer_set_usage = ifcfile.createIfcMaterialLayerSetUsage(material_layer_set, "AXIS2", "POSITIVE", -0.1)
 ifcfile.createIfcRelAssociatesMaterial(create_guid(), owner_history, RelatedObjects=[pipe], RelatingMaterial=material_layer_set_usage)
 
 
-# Relate the pipe to the building storey
+# Relate the object to the building storey
 ifcfile.createIfcRelContainedInSpatialStructure(create_guid(), owner_history, "Building Storey Container", None, [pipe], building_storey)
 
 

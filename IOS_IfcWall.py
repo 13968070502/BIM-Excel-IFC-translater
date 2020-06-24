@@ -63,7 +63,7 @@ template = """ISO-10303-21;
 HEADER;
 FILE_DESCRIPTION(('ViewDefinition [CoordinationView]'),'2;1');
 FILE_NAME('%(filename)s','%(timestring)s',('%(creator)s'),('%(organization)s'),'%(application)s','%(application)s','');
-FILE_SCHEMA(('IFC2X3'));
+FILE_SCHEMA(('IFC4'));
 ENDSEC;
 DATA;
 #1=IFCPERSON($,$,'%(creator)s',$,$,$,$,$);

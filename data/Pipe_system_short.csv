@@ -1,0 +1,7 @@
+File_Name;Object_Name;Object_Id;IFC_Element;Radius;inner_Radius;Elevation;Pipe_Usage;Pipe_type;Material;X_start;Y_start;X_end;Y_end;Project;Building;Floor;Room
+Pipe_system;pipe;P1;IfcFlowElement;0.15;0.14;0;hot;Heating;stainless steel;0.0;0.0;5.0;0.0;Excel-IFC-Translater;OTH;3;G201
+Pipe_system;pipe;P2;IfcFlowElement;0.15;0.14;0;hot;Heating;stainless steel;5.0;0.0;5.0;3.0;Excel-IFC-Translater;OTH;3;G201
+Pipe_system;pipe;P3;IfcFlowElement;0.15;0.14;0;hot;Heating;stainless steel;5.0;3.0;3.0;3.0;Excel-IFC-Translater;OTH;3;G201
+Pipe_system;pipe;P4;IfcFlowElement;0.15;0.14;0;hot;Heating;stainless steel;3.0;3.0;3.0;6.0;Excel-IFC-Translater;OTH;3;G201
+Pipe_system;pipe;P5;IfcFlowElement;0.15;0.14;0;hot;Heating;stainless steel;3.0;6.0;0.0;6.0;Excel-IFC-Translater;OTH;3;G201
+Pipe_system;pipe;P6;IfcFlowElement;0.15;0.14;0;hot;Heating;stainless steel;0.0;6.0;0.0;0.0;Excel-IFC-Translater;OTH;3;G201
