@@ -10,7 +10,8 @@ from ios_utilities \
     create_ifcextrudedareasolid, \
     create_ifcaxis1placement, \
     create_guid, \
-    create_ifcrevolvedareasolid
+    create_ifcrevolvedareasolid, \
+    create_ifccircle
 from import_from_csv import get_value
 
 
@@ -87,39 +88,48 @@ container_site = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "S
 container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "Project Container", None, project, [site])
 
 
-# Create shape of IfcObject by rotating an area with IfcRevolvedAreaSolid
-pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
-polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)])
-axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
+# Extrusion: Create shape of IfcObject by extrusion of Ifc
+#201=IFCARBITRARYPROFILEWITHVOIDS(.AREA.,'Pipe Profile', #202,(#203));
+#202=IFCCIRCLE(#204,0.2);
+#203=IFCCIRCLE(#204,0.25);
+#204=IFCAXIS2PLACEMENT2D(#205,$);
+#205=IFCCARTESIANPOINT(0.0,0.2));
+#206=IFCEXTRUDEDAREASOLID(#201,#204,#207,2000.0);
+#207=IFCDIRECTION((0.0,1.0,0,0));
+#208=IFCSHAPEREPRESENTATION(#145, 'body',$,(#206));
+#501=IFCPRODUCTDEFINITIONSHAPE($,$,(#208));
 
-rotation_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0))
-rotation_axis = create_ifcaxis1placement(ifcfile, (0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
-point_list_rotation_area = [(0.0, 0.3, 0.0), (0.0, 0.4, 0.0), (5.0, 0.4, 0.0), (5.0, 0.3, 0.0), (0.0, 0.3, 0.0)]
-solid = create_ifcrevolvedareasolid(ifcfile, point_list_rotation_area, rotation_placement, (0.0, 0.0, 1.0), 360) # 360° = Rotation
+pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement) # Placement of object in storey
+polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)]) # Axis of object
+axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
+circle = create_ifccircle(ifcfile, )
+extrusion_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0)) # Direction of extrusion
+
+solid = create_ifcextrudedareasolid(ifcfile, circle_list_extrusion_area, extrusion_placement, (0.0, 0.0, 1.0), 5.0)
 body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
 
 product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
 
-pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, get_value(1,1), get_value(1,8), get_value(1,7), pipe_placement, product_shape, get_value(1,2))
+pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, "Pipe", "An awesome pipe", None, pipe_placement,
+                                         product_shape, None)
 
-# --------------------------------------------------
 
-# Create shape of IfcObject by rotating an area with IfcRevolvedAreaSolid
+
+# Rotation: Create shape of IfcObject by rotating an area with IfcRevolvedAreaSolid
 # pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement)
-# polyline = create_ifcpolyline(ifcfile, [(get_value(1,10), get_value(1,12), 0.0), (get_value(1,11), get_value(1,13), 0.0)])
+# polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)])
 # axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
 
 # rotation_placement = create_ifcaxis2placement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0))
 # rotation_axis = create_ifcaxis1placement(ifcfile, (0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
-# point_list_rotation_area = [(0.0, get_value(1,5), 0.0), (0.0, get_value(1,4), 0.0), (get_value(1,11), get_value(1,4), 0.0), (get_value(1,11), get_value(1,5), 0.0), (0.0, get_value(1,5), 0.0)]
+# point_list_rotation_area = [(0.0, 0.3, 0.0), (0.0, 0.4, 0.0), (5.0, 0.4, 0.0), (5.0, 0.3, 0.0), (0.0, 0.3, 0.0)]
 # solid = create_ifcrevolvedareasolid(ifcfile, point_list_rotation_area, rotation_placement, (0.0, 0.0, 1.0), 360) # 360° = Rotation
 # body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
-
+#
 # product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
-
+#
 # pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, get_value(1,1), get_value(1,8), get_value(1,7), pipe_placement, product_shape, get_value(1,2))
 
-# --------------------------------------------------
 
 # Define and associate the object material
 material = ifcfile.createIfcMaterial(get_value(1,9))

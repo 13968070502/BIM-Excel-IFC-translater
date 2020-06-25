@@ -19,7 +19,6 @@ with open(path, 'r', newline='') as read_csv:
 # Change all necessary Columns to double
 
 
-
 # Print whole data
 for s in data:
     print(*s)

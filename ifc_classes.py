@@ -1,7 +1,7 @@
 """Ifc class model"""
 
-from create_GUID import create_GUID
 from import_from_csv import get_value
+from create_guid import create_GUID
 
 """Inheritance path of IfcPipeSegment"""
 
@@ -136,20 +136,20 @@ class IfcFlowElement(IfcDistributionFlowElement):
 """IfcPipeElement"""
 
 
-class IfcPipeElement(IfcFlowElement):
+class IfcPipeSegment(IfcFlowElement):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
         super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy,
                                                      ObjectPlacement, HasOpenings)
 
-    def print_IfcPipeElement_abilities(self):
-        super(IfcPipeElement, self).print_IfcDistributionElement_abilities()
+    def print_IfcPipeSegment_abilities(self):
+        super(IfcPipeSegment, self).print_IfcDistributionElement_abilities()
 
 
-# Instanciation - creating an object out of a class
-PipeElement = IfcPipeElement(create_GUID(), get_value(1, 0), get_value(1, 6), get_value(1, 2), 'IfcFlowElement', '0.0.0', 'No')
+# Instantiation - creating an object out of a class
+PipeSegment = IfcPipeSegment(create_GUID(), get_value(1, 1), get_value(1, 2), get_value(1, 8), get_value(1,3), '0.0.0', 'No')
 
-PipeElement.print_IfcPipeElement_abilities()
+PipeSegment.print_IfcPipeSegment_abilities()
 
 # Define headers
 # Object=0; Object_Id=1; IFC_Element=2; Diameter=3; Material=4; Pipe_Color=5; Piping_type=6; H_V=7;
