@@ -9,8 +9,8 @@ O = 0., 0., 0.
 X = 1., 0., 0.
 Y = 0., 1., 0.
 Z = 0., 0., 1.
-DN = 300
-DN_i = 290
+DN = 3.
+DN_i = 2.
 
 # Helper function definitions
 # Creates an IfcAxis2Placement3D from Location, Axis and RefDirection specified as Python tuples
@@ -31,8 +31,8 @@ DN_i = 290
 def create_ifccircle(ifcfile, point=O, radius=DN):
     radius = ifcfile.createIfcPositiveLengthMeasure(radius)
     point = ifcfile.createIfcCartesianPoint(point)
-    ifccircle = ifcfile.createIfcCircle(point, radius)
-    return ifccircle
+    circle = ifcfile.createIfcCircle(point, radius)
+    return circle
 
 # rotate solid
 def create_ifcrevolvedareasolid(ifcfile, point_list, ifcaxis2placement, rotate_dir, rotation):
@@ -84,7 +84,7 @@ def create_ifcpolyline(ifcfile, point_list):
 # Creates an IfcExtrudedAreaSolid from a list of points, specified as Python tuples
 def create_ifcextrudedareasolid(ifcfile, point_list, ifcaxis2placement, extrude_dir, extrusion):
     polyline = create_ifcpolyline(ifcfile, point_list)
-    ifcclosedprofile = ifcfile.createIfcArbitraryClosedProfileDef("AREA", None, polyline)
+    ifcclosedprofile = ifcfile.createIfcArbitraryProfileWithVoids("AREA", "Pipe", circle1, circle2)
     ifcdir = ifcfile.createIfcDirection(extrude_dir)
     ifcextrudedareasolid = ifcfile.createIfcExtrudedAreaSolid(ifcclosedprofile, ifcaxis2placement, ifcdir, extrusion)
     return ifcextrudedareasolid

@@ -20,8 +20,8 @@ with open(path, 'r', newline='') as read_csv:
 
 
 # Print whole data
-for s in data:
-    print(*s)
+#for s in data:
+#    print(*s)
 
 
 def get_value(object, attribute):
