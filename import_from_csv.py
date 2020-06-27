@@ -29,7 +29,6 @@ def get_value(object, attribute):
     return data[object][attribute]
 
 
-
 # ---------------------------------------------------------------------
 
 # for item in list_of_rows[0]:
