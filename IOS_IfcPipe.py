@@ -13,6 +13,11 @@ Z = 0., 0., 1.
 
 # Useful functions to generate geometry
 
+# Curve
+def create_ifccurve(ifcfile, axis2placement2D, radius):
+    ifccurve = ifcfile.createIfcCurve(axis2placement2D, radius)
+    return ifccurve
+
 # Circle
 def create_ifccircle(ifcfile, axis2placement2D, radius):
     ifccircle = ifcfile.createIfcCircle(axis2placement2D, radius)
@@ -52,10 +57,9 @@ def create_ifcpolyline(ifcfile, point_list):
     return polyline
 
 # Creates an IfcExtrudedAreaSolid from a list of points, specified as Python tuples
-def create_ifcextrudedareasolid(ifcfile, point, ifcaxis2placement, outer_radius, inner_radius, extrude_dir, extrusion):
-    outer_circle = create_ifccircle(ifcfile, point, outer_radius)
-    inner_circle = create_ifccircle(ifcfile, point, inner_radius)
-    ifcclosedprofile = ifcfile.createIfcArbitraryProfileWithVoids("AREA", "Pipe", outer_circle, (inner_circle))
+# solid = create_ifcextrudedareasolid(ifcfile, profile, extrusion_placement, (0.0, 0.0, 1.0), 5.0) # Extrusion
+
+def create_ifcextrudedareasolid(ifcfile, ifcclosedprofile, ifcaxis2placement, extrude_dir, extrusion):
     ifcdir = ifcfile.createIfcDirection(extrude_dir)
     ifcextrudedareasolid = ifcfile.createIfcExtrudedAreaSolid(ifcclosedprofile, ifcaxis2placement, ifcdir, extrusion)
     return ifcextrudedareasolid
@@ -156,11 +160,11 @@ container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history,
 pipe_placement = create_ifclocalplacement(ifcfile, relative_to=storey_placement) # Placement of object in storey
 polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (5.0, 0.0, 0.0)]) # Axis of object
 axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
-outercurve = create_ifccircle(ifcfile, pipe_placement, 0.3) # Outer circle
-innercurve = create_ifccircle(ifcfile, pipe_placement, (0.2)) # Inner circle
-profile = create_ifcarbitraryprofiledefwithvoids(ifcfile, "AREA", "Pipe Profile", outercurve, innercurve) # Profile Definition
+outer_circle = create_ifccircle(ifcfile, pipe_placement, 0.3) # Outer circle
+inner_circle = create_ifccircle(ifcfile, pipe_placement, 0.2) # Inner circle
+profile = create_ifcarbitraryprofiledefwithvoids(ifcfile, "AREA", "Pipe Profile", outer_circle, [inner_circle]) # Profile Definition
 extrusion_placement = create_ifcaxis2placement3D(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0), (1.0, 0.0, 0.0)) # Direction of extrusion
-solid = create_ifcextrudedareasolid(ifcfile, profile, extrusion_placement, (0.0, 0.0, 1.0), 5.0)
+solid = create_ifcextrudedareasolid(ifcfile, profile, extrusion_placement, (0.0, 0.0, 1.0), 5.0) # Extrusion
 body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
 
 product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
