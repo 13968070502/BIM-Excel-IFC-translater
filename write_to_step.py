@@ -9,15 +9,14 @@ from import_from_csv import get_value
 # Creation of Global Unique Identifier
 create_guid = lambda: ifcopenshell.guid.compress(uuid.uuid1().hex)
 
-
 # Direction points to define IfcAxis2Placement
 O = 0., 0., 0.
 X = 1., 0., 0.
 Y = 0., 1., 0.
 Z = 0., 0., 1.
 
-
 """Useful functions to generate geometry"""
+
 
 # Curve
 def create_ifccurve(ifcfile, axis2placement2D, radius):
@@ -44,6 +43,7 @@ def create_ifcaxis2placement3D(ifcfile, point=O, dir1=Z, dir2=X):
     dir2 = ifcfile.createIfcDirection(dir2)
     axis2placement3D = ifcfile.createIfcAxis2Placement3D(point, dir1, dir2)
     return axis2placement3D
+
 
 # Axis 2D
 def create_ifcaxis2placement2D(ifcfile, point=O, dir2=X):
@@ -79,7 +79,6 @@ def create_ifcextrudedareasolid(ifcfile, ifcclosedprofile, ifcaxis2placement, ex
 
 """Construction of the file"""
 
-
 # Definition of general file information
 filename = get_value(1, 0) + ".ifc"
 timestamp = time.time()
@@ -88,7 +87,6 @@ creator = "Alexander Wellenhofer"
 organization = "OTH Regensburg"
 application, application_version = "IfcOpenShell", "0.5"
 project_globalid, project_name = create_guid(), get_value(1, 0)
-
 
 # Definition of constant Elements which should be included in every IFC file
 template = """
@@ -123,12 +121,10 @@ ENDSEC;
 END-ISO-10303-21;
 """ % locals()  # Method, which updates and returns a dictionary
 
-
 # Write the elements to a temporary file
 temp_handle, temp_filename = tempfile.mkstemp(suffix=".ifc")
 with open(temp_filename, "w") as f:
     f.write(template)
-
 
 # Obtain references to instances defined in template
 ifcfile = ifcopenshell.open(temp_filename)
@@ -158,43 +154,48 @@ container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history,
 
 
 # ______________________________________________________________________________________________________________________
-
-def create_pipe()
-
-# Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
-pipe_placement = create_ifclocalplacement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), relative_to=storey_placement)  # Placement and direction of object
-polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (10.0, 0.0, 0.0)])  # Axis of object
-axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
-outer_circle = create_ifccircle(ifcfile, pipe_placement, 0.3)  # Outer circle
-inner_circle = create_ifccircle(ifcfile, pipe_placement, 0.25)  # Inner circle
-profile = create_ifcarbitraryprofiledefwithvoids(ifcfile, "AREA", "Pipe Profile", outer_circle,
-                                                 [inner_circle])  # Profile Definition
-extrusion_placement = create_ifcaxis2placement3D(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0),
-                                                 (1.0, 0.0, 0.0))  # Direction of extrusion
-solid = create_ifcextrudedareasolid(ifcfile, profile, extrusion_placement, (1.0, 0.0, 0.0), 10.0)  # Extrusion
-body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
-
-product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
-pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, "Pipe", "An awesome pipe", None, pipe_placement,
-                                    product_shape, None)
+#File_Name = 0; Object_Name = 1; Object_Id = 2; IFC_Element = 3; Outer_Radius = 4; Inner_Radius = 5; Pipe_Usage = 6; Pipe_type = 7; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14; Project = 15; Building = 16; Floor = 17; Room = 18
 
 
-# Define and associate the object material
-material = ifcfile.createIfcMaterial(get_value(1, 9))
-material_layer = ifcfile.createIfcMaterialLayer(material, 0.2, None)
-material_layer_set = ifcfile.createIfcMaterialLayerSet([material_layer], None)
-material_layer_set_usage = ifcfile.createIfcMaterialLayerSetUsage(material_layer_set, "AXIS2", "POSITIVE", -0.1)
-ifcfile.createIfcRelAssociatesMaterial(create_guid(), owner_history, RelatedObjects=[pipe],
-                                       RelatingMaterial=material_layer_set_usage)
+def create_pipe(name, description, outer_radius, inner_radius, material, origin, end):
+
+    # Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
+    pipe_placement = create_ifclocalplacement(ifcfile, origin, end, (0.0, 0.0, 0.0),
+                                              relative_to=storey_placement)  # Placement and direction of object
+    polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (0.0, 0.0, 0.0)])  # Axis of object
+    axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
+    outer_circle = create_ifccircle(ifcfile, pipe_placement, outer_radius)  # Outer circle
+    inner_circle = create_ifccircle(ifcfile, pipe_placement, inner_radius)  # Inner circle
+    profile = create_ifcarbitraryprofiledefwithvoids(ifcfile, "AREA", "Pipe Profile", outer_circle,
+                                                     [inner_circle])  # Profile Definition
+    extrusion_placement = create_ifcaxis2placement3D(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 1.0),
+                                                     (1.0, 0.0, 0.0))  # Direction of extrusion
+    solid = create_ifcextrudedareasolid(ifcfile, profile, extrusion_placement, (0.0, 0.0, 1.0), 10.0)  # Extrusion
+    body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
+
+    product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
+    pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, name, description, None, pipe_placement,
+                                        product_shape, None)
+
+    # Define and associate the object material
+    material = ifcfile.createIfcMaterial(material)
+    material_layer = ifcfile.createIfcMaterialLayer(material, 0.2, None)
+    material_layer_set = ifcfile.createIfcMaterialLayerSet([material_layer], None)
+    material_layer_set_usage = ifcfile.createIfcMaterialLayerSetUsage(material_layer_set, "AXIS2", "POSITIVE", -0.1)
+    ifcfile.createIfcRelAssociatesMaterial(create_guid(), owner_history, RelatedObjects=[pipe],
+                                           RelatingMaterial=material_layer_set_usage)
+
+    # Relate the object to the building storey
+    ifcfile.createIfcRelContainedInSpatialStructure(create_guid(), owner_history, "Building Storey Container", None,
+                                                    [pipe],
+                                                    building_storey)
 
 
-# Relate the object to the building storey
-ifcfile.createIfcRelContainedInSpatialStructure(create_guid(), owner_history, "Building Storey Container", None, [pipe],
-                                                building_storey)
+# create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14
+create_pipe(get_value(1, 1), get_value(1, 2), get_value(1, 4), get_value(1, 5), get_value(1, 8), (get_value(1, 9), get_value(1, 10), get_value(1, 11)), (get_value(1, 12), get_value(1, 13), get_value(1, 14)))
 
 
 # ______________________________________________________________________________________________________________________
-
 
 
 # Write the contents of the file to disk

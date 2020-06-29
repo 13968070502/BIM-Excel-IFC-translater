@@ -9,7 +9,7 @@ from import_from_csv import get_value
 class IfcPipeSegment:
     # Attribute definition
     File_Name = ""
-    Object = ""
+    Object_Name = ""
     Object_Id = ""
     IFC_Element = ""
     Outer_Radius = ""
@@ -29,10 +29,10 @@ class IfcPipeSegment:
     Room = ""
 
     # Constructor of the class
-    def __init__(self, File_Name, Object, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
+    def __init__(self, File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
                  Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Project, Building, Floor, Room):
         self.File_Name = File_Name
-        self.Object = Object
+        self.Object = Object_Name
         self.Object_Id = Object_Id
         self.IFC_Element = IFC_Element
         self.Outer_Radius = Outer_Radius
@@ -54,7 +54,7 @@ class IfcPipeSegment:
     # Function to print out the data of the class
     def print_IfcPipeSegment_abilities(self):
         print("File Name: ", self.File_Name)
-        print("Object: ", self.Object)
+        print("Object Name: ", self.Object_Name)
         print("Object-Id: ", self.Object_Id)
         print("IFC-Element: ", self.IFC_Element)
         print("Outer Radius: ", self.Outer_Radius)
@@ -83,21 +83,3 @@ IfcPipeSegment = IfcPipeSegment(get_value(1,0), get_value(1, 1), get_value(1, 2)
 
 
 IfcPipeSegment.print_IfcPipeSegment_abilities()
-
-
-
-#class IfcPipeSegment(IfcFlowElement):
-
-#    def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
-#        super(IfcDistributionElement, self).__init__(GlobalId, Name, Description, ObjectType, IsTypedBy,
-#                                                     ObjectPlacement, HasOpenings)
-
-#    def print_IfcPipeSegment_abilities(self):
-#        super(IfcPipeSegment, self).print_IfcDistributionElement_abilities()
-
-
-# Instantiation - creating an object out of a class
-
-#PipeSegment = IfcPipeSegment(create_GUID(), get_value(1, 1), get_value(1, 2), get_value(1, 8), get_value(1,3), '0.0.0', 'No')
-
-#PipeSegment.print_IfcPipeSegment_abilities()
