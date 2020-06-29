@@ -6,7 +6,7 @@ import csv
 path = 'data/Pipe_system_short.csv'
 
 # Define headers
-File_Name = 0; Object = 1; Object_Id = 2; IFC_Element = 3; Radius = 4; inner_Radius = 5; Elevation = 6; Pipe_Usage = 7; Pipe_type = 8; Material=9; X_start = 10; Y_start = 11; X_end = 12; Y_end = 13; Project = 14; Building = 15; Floor = 16; Room = 17
+File_Name = 0; Object = 1; Object_Id = 2; IFC_Element = 3; Outer_Radius = 4; Inner_Radius = 5; Pipe_Usage = 6; Pipe_type = 7; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14; Project = 15; Building = 16; Floor = 17; Room = 18
 
 # Read csv
 with open(path, 'r', newline='') as read_csv:

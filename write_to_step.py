@@ -1,3 +1,5 @@
+"""A program to construct a STEP-File."""
+
 import uuid
 import time
 import tempfile
@@ -15,7 +17,7 @@ Y = 0., 1., 0.
 Z = 0., 0., 1.
 
 
-# Useful functions to generate geometry
+"""Useful functions to generate geometry"""
 
 # Curve
 def create_ifccurve(ifcfile, axis2placement2D, radius):
@@ -73,6 +75,9 @@ def create_ifcextrudedareasolid(ifcfile, ifcclosedprofile, ifcaxis2placement, ex
     ifcdir = ifcfile.createIfcDirection(extrude_dir)
     ifcextrudedareasolid = ifcfile.createIfcExtrudedAreaSolid(ifcclosedprofile, ifcaxis2placement, ifcdir, extrusion)
     return ifcextrudedareasolid
+
+
+"""Construction of the file"""
 
 
 # Definition of general file information
@@ -151,8 +156,6 @@ container_site = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "S
 container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "Project Container", None, project,
                                                    [site])
 
-
-#def create_ifclocalplacement(ifcfile, point=O, dir1=Z, dir2=X, relative_to=None):
 
 # Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
 pipe_placement = create_ifclocalplacement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), relative_to=storey_placement)  # Placement and direction of object
