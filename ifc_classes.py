@@ -1,9 +1,12 @@
 """Ifc class model"""
 
+
 from import_from_csv import get_value
 from create_guid import create_GUID
 
+
 """Inheritance path of IfcPipeSegment"""
+
 
 # IfcRoot
 #   IfcObjectDefinition#
@@ -14,6 +17,7 @@ from create_guid import create_GUID
 #                       IfcDistributionFlowElement
 #                           IfcFlowSegment
 #                               IfcPipeSegment
+
 
 """Definition of class IfcPipeSegment with inherited abilities"""
 
@@ -147,10 +151,6 @@ class IfcPipeSegment(IfcFlowElement):
 
 
 # Instantiation - creating an object out of a class
-PipeSegment = IfcPipeSegment(create_GUID(), get_value(1, 1), get_value(1, 2), get_value(1, 8), get_value(1,3), '0.0.0', 'No')
+PipeSegment = IfcPipeSegment("", "", "", "", "", "", "")
 
 PipeSegment.print_IfcPipeSegment_abilities()
-
-# Define headers
-# Object=0; Object_Id=1; IFC_Element=2; Diameter=3; Material=4; Pipe_Color=5; Piping_type=6; H_V=7;
-# Total_vertices=8; X_min=9; Y_min=10; X_max=11; Y_max=12; Project=13; Building=14; Floor=15; Room=16

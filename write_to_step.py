@@ -157,6 +157,10 @@ container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history,
                                                    [site])
 
 
+# ______________________________________________________________________________________________________________________
+
+def create_pipe()
+
 # Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
 pipe_placement = create_ifclocalplacement(ifcfile, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), relative_to=storey_placement)  # Placement and direction of object
 polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (10.0, 0.0, 0.0)])  # Axis of object
@@ -187,6 +191,11 @@ ifcfile.createIfcRelAssociatesMaterial(create_guid(), owner_history, RelatedObje
 # Relate the object to the building storey
 ifcfile.createIfcRelContainedInSpatialStructure(create_guid(), owner_history, "Building Storey Container", None, [pipe],
                                                 building_storey)
+
+
+# ______________________________________________________________________________________________________________________
+
+
 
 # Write the contents of the file to disk
 ifcfile.write(filename)
