@@ -95,6 +95,7 @@ IfcPipeSegment = IfcPipeSegment(get_value(1,0), get_value(1, 1), get_value(1, 2)
                                         get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1,19))
 
 
+
 #IfcPipeSegment.print_IfcPipeSegment_abilities()
 
 
