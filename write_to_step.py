@@ -10,17 +10,21 @@ from import_from_csv import get_value
 create_guid = lambda: ifcopenshell.guid.compress(uuid.uuid1().hex)
 
 # Direction points to define IfcAxis2Placement
-O = 0., 0., 0.
-X = 1., 0., 0.
-Y = 0., 1., 0.
-Z = 0., 0., 1.
+O = 0.0, 0.0, 0.0
+X = 1.0, 0.0, 0.0
+Y = 0.0, 1.0, 0.0
+Z = 0.0, 0.0, 1.0
+nX = (-1.0), 0.0, 0.0
+nY = 0.0, (-1.0), 0.0
+nZ = 0.0, 0.0, (-1.0)
+
 
 """Useful functions to generate geometry"""
 
 
 # Curve
-def create_ifccurve(ifcfile, axis2placement2D, radius):
-    ifccurve = ifcfile.createIfcCurve(axis2placement2D, radius)
+def create_ifccurve(ifcfile, axis2placement3D, radius):
+    ifccurve = ifcfile.createIfcCurve(axis2placement3D, radius)
     return ifccurve
 
 
@@ -43,14 +47,6 @@ def create_ifcaxis2placement3D(ifcfile, point=O, dir1=Z, dir2=X):
     dir2 = ifcfile.createIfcDirection(dir2)
     axis2placement3D = ifcfile.createIfcAxis2Placement3D(point, dir1, dir2)
     return axis2placement3D
-
-
-# Axis 2D
-def create_ifcaxis2placement2D(ifcfile, point=O, dir2=X):
-    point = ifcfile.createIfcCartesianPoint(point)
-    dir2 = ifcfile.createIfcDirection(dir2)
-    axis2placement2D = ifcfile.createIfcAxis1Placement(point, dir2)
-    return axis2placement2D
 
 
 # Local placement (Location, Axis, RefDirection), specified as Python tuples, and relative placement
@@ -154,14 +150,11 @@ container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history,
 
 
 # ______________________________________________________________________________________________________________________
-#File_Name = 0; Object_Name = 1; Object_Id = 2; IFC_Element = 3; Outer_Radius = 4; Inner_Radius = 5; Pipe_Usage = 6; Pipe_type = 7; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14; Project = 15; Building = 16; Floor = 17; Room = 18
 
-
-def create_pipe(name, description, outer_radius, inner_radius, material, origin, end):
+def create_pipe(name, description, outer_radius, inner_radius, material, origin_point, direction):
 
     # Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
-    pipe_placement = create_ifclocalplacement(ifcfile, origin, end, (0.0, 0.0, 0.0),
-                                              relative_to=storey_placement)  # Placement and direction of object
+    pipe_placement = create_ifclocalplacement(ifcfile, origin_point, direction, relative_to=storey_placement)
     polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (0.0, 0.0, 0.0)])  # Axis of object
     axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
     outer_circle = create_ifccircle(ifcfile, pipe_placement, outer_radius)  # Outer circle
@@ -191,8 +184,8 @@ def create_pipe(name, description, outer_radius, inner_radius, material, origin,
                                                     building_storey)
 
 
-# create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14
-create_pipe(get_value(1, 1), get_value(1, 2), get_value(1, 4), get_value(1, 5), get_value(1, 8), (get_value(1, 9), get_value(1, 10), get_value(1, 11)), (get_value(1, 12), get_value(1, 13), get_value(1, 14)))
+# create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14; Direction=15
+create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_value(1, 5)), get_value(1, 8), (float(get_value(1, 9)), float(get_value(1, 10)), float(get_value(1, 11))), Y)
 
 
 # ______________________________________________________________________________________________________________________
