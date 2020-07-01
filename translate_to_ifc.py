@@ -1,6 +1,6 @@
 """A program to create objects out of an Ifc-class."""
 
-from import_from_csv import get_value
+from import_from_csv import get_value, data, get_list
 
 
 """IfcPipeSegment"""
@@ -29,7 +29,7 @@ class IfcPipeSegment:
     Floor = ""
     Room = ""
 
-    # Constructor of the class
+    # Constructor of the class (initializer)
     def __init__(self, File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
                  Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
         self.File_Name = File_Name
@@ -76,6 +76,16 @@ class IfcPipeSegment:
         print("Floor: ", self.Floor)
         print("Room: ", self.Room)
 
+def create_IfcPipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
+             Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
+    IfcPipe = IfcPipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
+             Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room)
+    return IfcPipe
+
+
+for list in data:
+    create_IfcPipeSegment(get_list())
+
 
 # Instantiation - creating an object out of a class
 IfcPipeSegment = IfcPipeSegment(get_value(1,0), get_value(1, 1), get_value(1, 2), get_value(1, 3),
@@ -85,4 +95,11 @@ IfcPipeSegment = IfcPipeSegment(get_value(1,0), get_value(1, 1), get_value(1, 2)
                                         get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1,19))
 
 
-IfcPipeSegment.print_IfcPipeSegment_abilities()
+#IfcPipeSegment.print_IfcPipeSegment_abilities()
+
+
+#objs = [IfcPipeSegment() for i in range(10)]
+#for obj in objs:
+#    IfcPipeSegment.add(obj)
+#
+#objs[0].print_IfcPipeSegment_abilities()

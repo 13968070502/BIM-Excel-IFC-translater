@@ -42,6 +42,11 @@ def get_value(object, attribute):
     return data[object][attribute]
 
 
+def get_list(object):
+    # Return specific list/object
+    return data[object]
+
+
 # ---------------------------------------------------------------------
 
 # Print whole data

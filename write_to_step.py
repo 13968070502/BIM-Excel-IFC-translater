@@ -19,7 +19,7 @@ nY = 0.0, (-1.0), 0.0
 nZ = 0.0, 0.0, (-1.0)
 
 
-"""Useful functions to generate geometry"""
+"""Functions to generate geometry"""
 
 
 # Curve
@@ -41,7 +41,7 @@ def create_ifcarbitraryprofiledefwithvoids(ifcfile, area, area_name, outer_circl
 
 
 # Axis 3D
-def create_ifcaxis2placement3D(ifcfile, point=O, dir1=Z, dir2=X):
+def create_ifcaxis2placement3D(ifcfile, point, dir1, dir2):
     point = ifcfile.createIfcCartesianPoint(point)
     dir1 = ifcfile.createIfcDirection(dir1)
     dir2 = ifcfile.createIfcDirection(dir2)
@@ -50,20 +50,10 @@ def create_ifcaxis2placement3D(ifcfile, point=O, dir1=Z, dir2=X):
 
 
 # Local placement (Location, Axis, RefDirection), specified as Python tuples, and relative placement
-def create_ifclocalplacement(ifcfile, point=O, dir1=Z, dir2=X, relative_to=None):
+def create_ifclocalplacement(ifcfile, point, dir1, dir2, relative_to=None):
     axis2placement3D = create_ifcaxis2placement3D(ifcfile, point, dir1, dir2)
     ifclocalplacement = ifcfile.createIfcLocalPlacement(relative_to, axis2placement3D)
     return ifclocalplacement
-
-
-# PolyLine from a list of points, specified as Python tuples
-def create_ifcpolyline(ifcfile, point_list):
-    ifcpts = []
-    for point in point_list:
-        point = ifcfile.createIfcCartesianPoint(point)
-        ifcpts.append(point)
-    polyline = ifcfile.createIfcPolyLine(ifcpts)
-    return polyline
 
 
 # Extrusion of an area in a specific direction
@@ -129,15 +119,15 @@ project = ifcfile.by_type("IfcProject")[0]
 context = ifcfile.by_type("IfcGeometricRepresentationContext")[0]
 
 # IFC hierarchy creation (site, building, storey)
-site_placement = create_ifclocalplacement(ifcfile)
+site_placement = create_ifclocalplacement(ifcfile, O, Z, X)
 site = ifcfile.createIfcSite(create_guid(), owner_history, "Site", None, None, site_placement, None, None, "ELEMENT",
                              None, None, None, None, None)
 
-building_placement = create_ifclocalplacement(ifcfile, relative_to=site_placement)
+building_placement = create_ifclocalplacement(ifcfile, O, Z, X, relative_to=site_placement)
 building = ifcfile.createIfcBuilding(create_guid(), owner_history, 'Building', None, None, building_placement, None,
                                      None, "ELEMENT", None, None, None)
 
-storey_placement = create_ifclocalplacement(ifcfile, relative_to=building_placement)
+storey_placement = create_ifclocalplacement(ifcfile, O, Z, X, relative_to=building_placement)
 elevation = 0.0
 building_storey = ifcfile.createIfcBuildingStorey(create_guid(), owner_history, 'Storey', None, None, storey_placement,
                                                   None, None, "ELEMENT", elevation)
@@ -154,9 +144,7 @@ container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history,
 def create_pipe(name, description, outer_radius, inner_radius, material, origin_point, direction):
 
     # Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
-    pipe_placement = create_ifclocalplacement(ifcfile, origin_point, direction, relative_to=storey_placement)
-    polyline = create_ifcpolyline(ifcfile, [(0.0, 0.0, 0.0), (0.0, 0.0, 0.0)])  # Axis of object
-    axis_representation = ifcfile.createIfcShapeRepresentation(context, "Axis", "Curve2D", [polyline])
+    pipe_placement = create_ifclocalplacement(ifcfile, origin_point, direction, Z, relative_to=storey_placement)
     outer_circle = create_ifccircle(ifcfile, pipe_placement, outer_radius)  # Outer circle
     inner_circle = create_ifccircle(ifcfile, pipe_placement, inner_radius)  # Inner circle
     profile = create_ifcarbitraryprofiledefwithvoids(ifcfile, "AREA", "Pipe Profile", outer_circle,
@@ -166,7 +154,7 @@ def create_pipe(name, description, outer_radius, inner_radius, material, origin_
     solid = create_ifcextrudedareasolid(ifcfile, profile, extrusion_placement, (0.0, 0.0, 1.0), 10.0)  # Extrusion
     body_representation = ifcfile.createIfcShapeRepresentation(context, "Body", "SweptSolid", [solid])
 
-    product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [axis_representation, body_representation])
+    product_shape = ifcfile.createIfcProductDefinitionShape(None, None, [body_representation])
     pipe = ifcfile.createIfcPipeSegment(create_guid(), owner_history, name, description, None, pipe_placement,
                                         product_shape, None)
 
@@ -185,7 +173,7 @@ def create_pipe(name, description, outer_radius, inner_radius, material, origin_
 
 
 # create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14; Direction=15
-create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_value(1, 5)), get_value(1, 8), (float(get_value(1, 9)), float(get_value(1, 10)), float(get_value(1, 11))), Y)
+create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_value(1, 5)), get_value(1, 8), (float(get_value(1, 9)), float(get_value(1, 10)), float(get_value(1, 11))), X)
 
 
 # ______________________________________________________________________________________________________________________
