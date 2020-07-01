@@ -6,7 +6,7 @@ from import_from_csv import get_value, data, get_list
 """IfcPipeSegment"""
 
 
-class IfcPipeSegment:
+class IfcPipeSegment(object):
     # Attribute definition
     File_Name = ""
     Object_Name = ""
@@ -84,11 +84,27 @@ def create_IfcPipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_
     return IfcPipe
 
 
-create_IfcPipeSegment(get_value(1, 0), get_value(1, 1), get_value(1, 2), get_value(1, 3),
-                                        get_value(1, 4), get_value(1, 5), get_value(1, 6), get_value(1, 7),
-                                        get_value(1, 8), get_value(1, 9), get_value(1, 10), get_value(1, 11),
-                                        get_value(1, 12), get_value(1, 13), get_value(1, 14), get_value(1, 15),
-                                        get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1, 19))
+# Instanciation: Create Objects out of class
+x = 0
+array = []
+for row in data[1:]:
+    x =+ 1
+    array.append(create_IfcPipeSegment(get_value(x,0), get_value(x, 1), get_value(x, 2), get_value(x, 3),
+                                        get_value(x, 4), get_value(x, 5), get_value(x, 6), get_value(x, 7),
+                                        get_value(x, 8), get_value(x, 9), get_value(x, 10), get_value(x, 11),
+                                        get_value(x, 12), get_value(x, 13), get_value(x, 14), get_value(x, 15),
+                                        get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x,19)))
+print(array)
+
+
+
+
+
+#create_IfcPipeSegment(get_value(1, 0), get_value(1, 1), get_value(1, 2), get_value(1, 3),
+#                                        get_value(1, 4), get_value(1, 5), get_value(1, 6), get_value(1, 7),
+#                                        get_value(1, 8), get_value(1, 9), get_value(1, 10), get_value(1, 11),
+#                                        get_value(1, 12), get_value(1, 13), get_value(1, 14), get_value(1, 15),
+#                                        get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1, 19))
 
 
 
@@ -103,26 +119,16 @@ create_IfcPipeSegment(get_value(1, 0), get_value(1, 1), get_value(1, 2), get_val
 
 
 
-#x = 0
-#array = []
-#for row in data[1:]:
-#    x =+ 1
-#    array.append(create_IfcPipeSegment(get_value(x,0), get_value(x, 1), get_value(x, 2), get_value(x, 3),
-#                                        get_value(x, 4), get_value(x, 5), get_value(x, 6), get_value(x, 7),
-#                                        get_value(x, 8), get_value(x, 9), get_value(x, 10), get_value(x, 11),
-#                                        get_value(x, 12), get_value(x, 13), get_value(x, 14), get_value(x, 15),
-#                                        get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x,19)))
-#print(array)
+
+## Instantiation - creating an object out of a class
+#PipeValues = IfcPipeSegment(get_value(1, 0), get_value(1, 1), get_value(1, 2), get_value(1, 3),
+#                                        get_value(1, 4), get_value(1, 5), get_value(1, 6), get_value(1, 7),
+#                                        get_value(1, 8), get_value(1, 9), get_value(1, 10), get_value(1, 11),
+#                                        get_value(1, 12), get_value(1, 13), get_value(1, 14), get_value(1, 15),
+#                                        get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1,19))
 
 
 
-
-# Instantiation - creating an object out of a class
-PipeValues = IfcPipeSegment(get_value(1, 0), get_value(1, 1), get_value(1, 2), get_value(1, 3),
-                                        get_value(1, 4), get_value(1, 5), get_value(1, 6), get_value(1, 7),
-                                        get_value(1, 8), get_value(1, 9), get_value(1, 10), get_value(1, 11),
-                                        get_value(1, 12), get_value(1, 13), get_value(1, 14), get_value(1, 15),
-                                        get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1,19))
 
 
 #PipeValues.print_IfcPipeSegment_abilities()
