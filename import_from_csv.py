@@ -49,8 +49,8 @@ def get_list(object):
 # ---------------------------------------------------------------------
 
 # Print whole data
-# for s in data:
-#    print(*s)
+for s in data:
+    print(*s)
 
 
 #for item in data[0]:

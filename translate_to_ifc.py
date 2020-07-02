@@ -6,7 +6,7 @@ from import_from_csv import get_value, data, get_list
 """IfcPipeSegment"""
 
 
-class IfcPipeSegment(object):
+class PipeSegment(object):
     # Attribute definition
     File_Name = ""
     Object_Name = ""
@@ -54,7 +54,7 @@ class IfcPipeSegment(object):
         self.Room = Room
 
     # Function to print out the data of the class
-    def print_IfcPipeSegment_abilities(self):
+    def print_PipeSegment_abilities(self):
         print("File Name: ", self.File_Name)
         print("Object Name: ", self.Object_Name)
         print("Object-Id: ", self.Object_Id)
@@ -77,9 +77,9 @@ class IfcPipeSegment(object):
         print("Room: ", self.Room)
 
 
-def create_IfcPipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
+def create_PipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
              Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
-    IfcPipe = IfcPipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
+    IfcPipe = PipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
              Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room)
     return IfcPipe
 
@@ -87,13 +87,13 @@ def create_IfcPipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_
 # Instanciation: Create Objects out of class
 x = 0
 array = []
-for row in data[1:]:
-    x =+ 1
-    array.append(create_IfcPipeSegment(get_value(x,0), get_value(x, 1), get_value(x, 2), get_value(x, 3),
+for list in data[1:]:
+    x = x+1
+    array.append(create_PipeSegment(get_value(x, 0), get_value(x, 1), get_value(x, 2), get_value(x, 3),
                                         get_value(x, 4), get_value(x, 5), get_value(x, 6), get_value(x, 7),
                                         get_value(x, 8), get_value(x, 9), get_value(x, 10), get_value(x, 11),
                                         get_value(x, 12), get_value(x, 13), get_value(x, 14), get_value(x, 15),
-                                        get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x,19)))
+                                        get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x, 19)))
 print(array)
 
 

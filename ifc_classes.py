@@ -9,7 +9,7 @@ from create_guid import create_GUID
 
 
 # IfcRoot
-#   IfcObjectDefinition#
+#   IfcObjectDefinition
 #       IfcObject
 #           IfcProduct
 #               IfcElement
