@@ -1,24 +1,44 @@
-class MyClass(object):
-    def __init__(self, number):
-        self.number = number
+# Definition of the class 'wall' with abilities
+
+class Wall:
+    name = ""
+    description = ""
+    material = ""
+    length = ""
+    width = ""
+    height = ""
+
+    def __init__(self, name, description, material, length, width, height):
+        self.name = name
+        self.description = description
+        self.material = material
+        self.length = length
+        self.width = width
+        self.height = height
 
 
-my_objects = []
+# Definition of class 'ReinforcedConcreteWall' with inherited and own abilities
 
-for i in range(100):
-    my_objects.append(MyClass(i))
+class ReinforcedConcreteWall(Wall):
+    structure = ""
+    function = ""
 
-# later
+    def __init__(self, name, description, material, length, width, height, structure, function):
+        super(ReinforcedConcreteWall, self).__init__(name, description, material, length, width, height)
+        self.structure = structure
+        self.function = function
 
-for obj in my_objects:
-    print(obj.number)
+
+# Function to instantiate the class to an object
+
+def create_ReinforcedConcreteWall(name, description, material, length, width, height, structure, function):
+    Wall = ReinforcedConcreteWall(name, description, material, length, width, height, structure, function)
+    return Wall
+
+# Save the object to an array
+array = []
+array.append(create_ReinforcedConcreteWall('Reinforced Concrete Wall', 'STB300', 'reinforced concrete', '5,00m', '0,30m', '2,70m', 'load-bearing element', 'outside'))
 
 
-class SimpleClass(object):
-    pass
-simplelist = []
-for count in range(4):
-    x = SimpleClass()
-    x.attr = count
-    simplelist.append(x)
-
+# output
+print(array)
