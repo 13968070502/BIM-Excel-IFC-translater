@@ -1,0 +1,7 @@
+File_Name;Object_Name;Object_Id;IFC_Element;Outer_Radius;Inner_Radius;Pipe_Usage;Pipe_Type;Material;X_Start;Y_Start;Z_Start;X_End;Y_End;Z_end;X_Dir;Y_Dir;Z_Dir;Project;Building;Floor;Room
+Pipe_system;Pipe;P1;IfcPipeSegment;0.30;0.25;hot;heating;stainless steel;0.0;0.0;0.0;5.0;0.0;0.0;1.0;0.0;0.0;Excel-IFC-Translater;OTH;3.0;G201
+Pipe_system;Pipe;P2;IfcPipeSegment;0.30;0.25;hot;heating;stainless steel;5.0;0.0;0.0;5.0;3.0;0.0;0.0;1.0;0.0;Excel-IFC-Translater;OTH;3.0;G201
+Pipe_system;Pipe;P3;IfcPipeSegment;0.30;0.25;hot;heating;stainless steel;5.0;3.0;0.0;3.0;3.0;0.0;-1.0;0.0;0.0;Excel-IFC-Translater;OTH;3.0;G201
+Pipe_system;Pipe;P4;IfcPipeSegment;0.30;0.25;hot;heating;stainless steel;3.0;3.0;0.0;3.0;6.0;0.0;0.0;1.0;0.0;Excel-IFC-Translater;OTH;3.0;G201
+Pipe_system;Pipe;P5;IfcPipeSegment;0.30;0.25;hot;heating;stainless steel;3.0;6.0;0.0;0.0;6.0;0.0;-1.0;0.0;0.0;Excel-IFC-Translater;OTH;3.0;G201
+Pipe_system;Pipe;P6;IfcPipeSegment;0.30;0.25;hot;heating;stainless steel;0.0;6.0;0.0;0.0;0.0;0.0;0.0;-1.0;0.0;Excel-IFC-Translater;OTH;3.0;G201
