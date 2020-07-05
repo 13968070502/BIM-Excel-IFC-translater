@@ -171,12 +171,12 @@ def create_pipe(name, description, outer_radius, inner_radius, material, origin_
 
 
 # create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; X_start = 9; Y_start = 10; Z_start=11; X_end = 12; Y_end = 13; Z_end=14; Direction=15
-create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_value(1, 5)), get_value(1, 8), (float(get_value(1, 9)), float(get_value(1, 10)), float(get_value(1, 11))), X)
-#create_pipe(get_value(2, 1), get_value(2, 2), float(get_value(2, 4)), float(get_value(2, 5)), get_value(2, 8), (float(get_value(2, 9)), float(get_value(2, 10)), float(get_value(2, 11))), Y)
-#create_pipe(get_value(3, 1), get_value(3, 2), float(get_value(3, 4)), float(get_value(3, 5)), get_value(3, 8), (float(get_value(3, 9)), float(get_value(3, 10)), float(get_value(3, 11))), nX)
-#create_pipe(get_value(4, 1), get_value(4, 2), float(get_value(4, 4)), float(get_value(4, 5)), get_value(4, 8), (float(get_value(4, 9)), float(get_value(4, 10)), float(get_value(4, 11))), Y)
-#create_pipe(get_value(5, 1), get_value(5, 2), float(get_value(5, 4)), float(get_value(5, 5)), get_value(5, 8), (float(get_value(5, 9)), float(get_value(5, 10)), float(get_value(5, 11))), nX)
-#create_pipe(get_value(6, 1), get_value(6, 2), float(get_value(6, 4)), float(get_value(6, 5)), get_value(6, 8), (float(get_value(6, 9)), float(get_value(6, 10)), float(get_value(6, 11))), nY)
+create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_value(1, 5)), get_value(1, 8), (float(get_value(1, 10)), float(get_value(1, 11)), float(get_value(1, 12))), X)
+create_pipe(get_value(2, 1), get_value(2, 2), float(get_value(2, 4)), float(get_value(2, 5)), get_value(2, 8), (float(get_value(2, 10)), float(get_value(2, 11)), float(get_value(2, 12))), Y)
+create_pipe(get_value(3, 1), get_value(3, 2), float(get_value(3, 4)), float(get_value(3, 5)), get_value(3, 8), (float(get_value(3, 10)), float(get_value(3, 11)), float(get_value(3, 12))), nX)
+create_pipe(get_value(4, 1), get_value(4, 2), float(get_value(4, 4)), float(get_value(4, 5)), get_value(4, 8), (float(get_value(4, 10)), float(get_value(4, 11)), float(get_value(4, 12))), Y)
+create_pipe(get_value(5, 1), get_value(5, 2), float(get_value(5, 4)), float(get_value(5, 5)), get_value(5, 8), (float(get_value(5, 10)), float(get_value(5, 11)), float(get_value(5, 12))), nX)
+create_pipe(get_value(6, 1), get_value(6, 2), float(get_value(6, 4)), float(get_value(6, 5)), get_value(6, 8), (float(get_value(6, 10)), float(get_value(6, 11)), float(get_value(6, 12))), nY)
 # ______________________________________________________________________________________________________________________
 
 

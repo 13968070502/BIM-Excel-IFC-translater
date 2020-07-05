@@ -15,17 +15,18 @@ Inner_Radius = 5
 Pipe_Usage = 6
 Pipe_type = 7
 Material = 8
-X_start = 9
-Y_start = 10
-Z_start = 11
-X_end = 12
-Y_end = 13
-Z_end = 14
-Direction = 15
-Project = 16
-Building = 17
-Floor = 18
-Room = 19
+Length = 9
+X_start = 10
+Y_start = 11
+Z_start = 12
+X_end = 13
+Y_end = 14
+Z_end = 15
+Direction = 16
+Project = 17
+Building = 18
+Floor = 19
+Room = 20
 
 
 # Read csv

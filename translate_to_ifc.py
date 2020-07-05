@@ -17,6 +17,7 @@ class PipeSegment(object):
     Pipe_Usage = ""
     Pipe_type = ""
     Material = ""
+    Length = ""
     X_start = ""
     Y_start = ""
     Z_start = ""
@@ -31,7 +32,7 @@ class PipeSegment(object):
 
     # Constructor of the class (initializer)
     def __init__(self, File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
-                 Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
+                 Material, Length, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
         self.File_Name = File_Name
         self.Object = Object_Name
         self.Object_Id = Object_Id
@@ -41,6 +42,7 @@ class PipeSegment(object):
         self.Pipe_Usage = Pipe_Usage
         self.Pipe_type = Pipe_type
         self.Material = Material
+        self.Length = Length
         self.X_start = X_start
         self.Y_start = Y_start
         self.Z_start = Z_start
@@ -64,6 +66,7 @@ class PipeSegment(object):
         print("Pipe-usage: ", self.Pipe_Usage)
         print("Pipe-type: ", self.Pipe_type)
         print("Material: ", self.Material)
+        print("Length: ", self.Length)
         print("X-Start: ", self.X_start)
         print("Y-Start: ", self.Y_start)
         print("Z-Start: ", self.Z_start)
@@ -78,9 +81,9 @@ class PipeSegment(object):
 
 
 def create_PipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
-             Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
+             Material, Length, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room):
     IfcPipe = PipeSegment(File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage, Pipe_type,
-             Material, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room)
+             Material, Length, X_start, Y_start, Z_start, X_end, Y_end, Z_end, Direction, Project, Building, Floor, Room)
     return IfcPipe
 
 
@@ -93,18 +96,9 @@ for list in data[1:]:
                                         get_value(x, 4), get_value(x, 5), get_value(x, 6), get_value(x, 7),
                                         get_value(x, 8), get_value(x, 9), get_value(x, 10), get_value(x, 11),
                                         get_value(x, 12), get_value(x, 13), get_value(x, 14), get_value(x, 15),
-                                        get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x, 19)))
+                                        get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x, 19),
+                                        get_value(x,20)))
 print(array)
-
-
-
-
-
-#create_IfcPipeSegment(get_value(1, 0), get_value(1, 1), get_value(1, 2), get_value(1, 3),
-#                                        get_value(1, 4), get_value(1, 5), get_value(1, 6), get_value(1, 7),
-#                                        get_value(1, 8), get_value(1, 9), get_value(1, 10), get_value(1, 11),
-#                                        get_value(1, 12), get_value(1, 13), get_value(1, 14), get_value(1, 15),
-#                                        get_value(1, 16), get_value(1, 17), get_value(1, 18), get_value(1, 19))
 
 
 
