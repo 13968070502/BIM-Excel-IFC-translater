@@ -1,6 +1,6 @@
-"""A file to import and write csv files."""
+"""Import csv files."""
 
-# Import csv file
+# Import csv module and define path
 import csv
 
 path = 'data/Pipe_system_short.csv'
@@ -29,13 +29,16 @@ Floor = 19
 Room = 20
 
 
-# Read csv
+# Read csv data
 with open(path, 'r', newline='') as read_csv:
     # pass file objects to reader() to get the reader object
     csv_reader = csv.reader(read_csv, delimiter=';')
 
     # Pass reader object to list to get list of lists
     data = list(csv_reader)
+
+
+"""Useful functions to access the imported data."""
 
 
 def get_value(object, attribute):
@@ -47,19 +50,8 @@ def get_list(object):
     # Return specific list/object
     return data[object]
 
-# ---------------------------------------------------------------------
 
 # Print whole data
 for s in data:
     print(*s)
 
-
-#for item in data[0]:
-#    print(item)
-#    array.append([item + '=' + str(num)])
-#    num += 1
-
-
-# Change str to double/float
-# print(type(float(get_value(3,9))))
-# print(float(get_value(3,9)))

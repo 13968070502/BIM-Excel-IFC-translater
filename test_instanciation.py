@@ -1,3 +1,5 @@
+"""Creation of classes with inherited abilities and instantiation to an object."""
+
 # Definition of the class 'wall' with abilities
 
 class Wall:

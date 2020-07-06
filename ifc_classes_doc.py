@@ -84,7 +84,7 @@ class IfcFlowElement(IfcDistributionFlowElement):
                                                      ObjectPlacement, HasOpenings)
 
 
-"""IfcPipeElement"""
+"""IfcPipeSegment"""
 class IfcPipeSegment(IfcFlowElement):
 
     def __init__(self, GlobalId, Name, Description, ObjectType, IsTypedBy, ObjectPlacement, HasOpenings):
