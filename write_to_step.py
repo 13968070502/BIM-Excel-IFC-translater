@@ -175,31 +175,26 @@ def create_pipe(name, description, outer_radius, inner_radius, material, length,
 # ______________________________________________________________________________________________________________________
 """Loop to create multiple objects depending on imported data"""
 
-#x = 0
-#
-## Loop through lists of csv-data - one list is one object
-#for list in data[1:]:
-#    x = x + 1
-#
-#    # Get values from csv-data to create objects
+x = 0
 
-# Coordinates and vektors
-start = float(get_value(1,10)), float(get_value(1, 11)), float(get_value(1, 12))
-end = float(get_value(1,13)), float(get_value(1, 14)), float(get_value(1, 15))
-dir_x = float(get_value(1,10))-float(get_value(1,13))
-dir_y = float(get_value(1,11))-float(get_value(1,14))
-dir_z = float(get_value(1,12))-float(get_value(1,15))
+# Loop through lists of csv-data - one list is one object
+for list in data[1:]:
+    x = x + 1
 
 
-#    # Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material = 8; Length = 9; X_start = 10; Y_start = 11; Z_start = 12; X_end = 13; Y_end = 14; Z_end = 15; Direction = 16
-#    create_pipe(get_value(x, 1), get_value(x, 2), float(get_value(x, 4)), float(get_value(x, 5)), get_value(x, 8), float(get_value(x, 9)), (float(get_value(x, 10)), float(get_value(x, 11)), float(get_value(x, 12))), (float(get_value(x, 13)), float(get_value(x, 14)), float(get_value(x, 15))))
+    # Get values from csv-data to create objects
 
 
+    # Coordinates and vektors
+    start = float(get_value(x,10)), float(get_value(x, 11)), float(get_value(x, 12))
+    end = float(get_value(x,13)), float(get_value(x, 14)), float(get_value(x, 15))
+    dir_x = (float(get_value(x,10))-float(get_value(x,13)))*(-1)
+    dir_y = (float(get_value(x,11))-float(get_value(x,14)))*(-1)
+    dir_z = (float(get_value(x,12))-float(get_value(x,15)))*(-1)
 
-# create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; Length=9; X_start = 10; Y_start = 11; Z_start=12; X_end = 13; Y_end = 14; Z_end=15; Direction=16
-create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_value(1, 5)), get_value(1, 8), float(get_value(1, 9)), start, (dir_x, dir_y, dir_z))
 
-
+    # create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; Length=9; X_start = 10; Y_start = 11; Z_start=12; X_end = 13; Y_end = 14; Z_end=15; Direction=16
+    create_pipe(get_value(x, 1), get_value(x, 2), float(get_value(x, 4)), float(get_value(x, 5)), get_value(x, 8), float(get_value(x, 9)), start, (dir_x, dir_y, dir_z))
 
 
 #create_pipe(get_value(2, 1), get_value(2, 2), float(get_value(2, 4)), float(get_value(2, 5)), get_value(2, 8), float(get_value(2, 9)), (float(get_value(2, 10)), float(get_value(2, 11)), float(get_value(2, 12))), Y)
@@ -208,8 +203,6 @@ create_pipe(get_value(1, 1), get_value(1, 2), float(get_value(1, 4)), float(get_
 #create_pipe(get_value(5, 1), get_value(5, 2), float(get_value(5, 4)), float(get_value(5, 5)), get_value(5, 8), float(get_value(5, 9)), (float(get_value(5, 10)), float(get_value(5, 11)), float(get_value(5, 12))), nX)
 #create_pipe(get_value(6, 1), get_value(6, 2), float(get_value(6, 4)), float(get_value(6, 5)), get_value(6, 8), float(get_value(6, 9)), (float(get_value(6, 10)), float(get_value(6, 11)), float(get_value(6, 12))), nY)
 # ______________________________________________________________________________________________________________________
-
-
 
 
 
