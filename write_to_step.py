@@ -173,6 +173,7 @@ def create_pipe(name, description, outer_radius, inner_radius, material, length,
 
 
 # ______________________________________________________________________________________________________________________
+
 """Loop to create multiple objects depending on imported data"""
 
 x = 0
@@ -197,11 +198,6 @@ for list in data[1:]:
     create_pipe(get_value(x, 1), get_value(x, 2), float(get_value(x, 4)), float(get_value(x, 5)), get_value(x, 8), float(get_value(x, 9)), start, (dir_x, dir_y, dir_z))
 
 
-#create_pipe(get_value(2, 1), get_value(2, 2), float(get_value(2, 4)), float(get_value(2, 5)), get_value(2, 8), float(get_value(2, 9)), (float(get_value(2, 10)), float(get_value(2, 11)), float(get_value(2, 12))), Y)
-#create_pipe(get_value(3, 1), get_value(3, 2), float(get_value(3, 4)), float(get_value(3, 5)), get_value(3, 8), float(get_value(3, 9)), (float(get_value(3, 10)), float(get_value(3, 11)), float(get_value(3, 12))), nX)
-#create_pipe(get_value(4, 1), get_value(4, 2), float(get_value(4, 4)), float(get_value(4, 5)), get_value(4, 8), float(get_value(4, 9)), (float(get_value(4, 10)), float(get_value(4, 11)), float(get_value(4, 12))), Y)
-#create_pipe(get_value(5, 1), get_value(5, 2), float(get_value(5, 4)), float(get_value(5, 5)), get_value(5, 8), float(get_value(5, 9)), (float(get_value(5, 10)), float(get_value(5, 11)), float(get_value(5, 12))), nX)
-#create_pipe(get_value(6, 1), get_value(6, 2), float(get_value(6, 4)), float(get_value(6, 5)), get_value(6, 8), float(get_value(6, 9)), (float(get_value(6, 10)), float(get_value(6, 11)), float(get_value(6, 12))), nY)
 # ______________________________________________________________________________________________________________________
 
 

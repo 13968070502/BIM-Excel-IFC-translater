@@ -4,7 +4,7 @@
 import csv
 import numpy as np
 
-path = 'data/Pipe_system_short.csv'
+path = 'data/Pipe_system.csv'
 
 # Define headers
 File_Name = 0
