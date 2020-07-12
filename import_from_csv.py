@@ -3,8 +3,9 @@
 # Import csv module and define path
 import csv
 import numpy as np
+import math
 
-path = 'data/Pipe_system.csv'
+path = 'data/Pipe_system_short.csv'
 
 # Define headers
 File_Name = 0
@@ -56,6 +57,10 @@ def get_list(object):
 for s in data:
     print(*s)
 
+
+
+#zahl = math.sqrt(float(get_value(1, 10)))
+#print(zahl)
 
 
 #start = np.array([float(get_value(1,10)), float(get_value(1, 11)), float(get_value(1, 12))])

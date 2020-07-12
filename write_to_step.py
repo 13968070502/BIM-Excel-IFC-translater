@@ -5,6 +5,7 @@ import time
 import tempfile
 import ifcopenshell
 import numpy as np
+import math
 from import_from_csv import get_value, data
 
 # Creation of Global Unique Identifier
@@ -18,7 +19,6 @@ Z = 0.0, 0.0, 1.0
 nX = (-1.0), 0.0, 0.0
 nY = 0.0, (-1.0), 0.0
 nZ = 0.0, 0.0, (-1.0)
-
 
 """Functions to generate geometry"""
 
@@ -139,12 +139,11 @@ container_site = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "S
 container_project = ifcfile.createIfcRelAggregates(create_guid(), owner_history, "Project Container", None, project,
                                                    [site])
 
-
 # ______________________________________________________________________________________________________________________
 """Function to create an IfcPipeSegment"""
 
-def create_pipe(name, description, outer_radius, inner_radius, material, length, origin_point, direction):
 
+def create_pipe(name, description, outer_radius, inner_radius, material, length, origin_point, direction):
     # Construction of geometry by extrusion of IfcArbitraryProfileDefWithVoids (two IfcCircles)
     object_placement = create_ifclocalplacement(ifcfile, origin_point, direction, Z, relative_to=storey_placement)
     outer_circle = create_ifccircle(ifcfile, object_placement, outer_radius)  # Outer circle
@@ -182,24 +181,34 @@ x = 0
 for list in data[1:]:
     x = x + 1
 
-
     # Get values from csv-data to create objects
 
+    # Coordinates and vectors
+    start = float(get_value(x, 10)), float(get_value(x, 11)), float(get_value(x, 12))
+    end = float(get_value(x, 13)), float(get_value(x, 14)), float(get_value(x, 15))
+    sqrt_start_x = math.sqrt(float(get_value(x, 10)) ** 2)
+    sqrt_start_y = math.sqrt(float(get_value(x, 11)) ** 2)
+    sqrt_start_z = math.sqrt(float(get_value(x, 12)) ** 2)
+    sqrt_end_x = math.sqrt(float(get_value(x, 13)) ** 2)
+    sqrt_end_y = math.sqrt(float(get_value(x, 14)) ** 2)
+    sqrt_end_z = math.sqrt(float(get_value(x, 15)) ** 2)
 
-    # Coordinates and vektors
-    start = float(get_value(x,10)), float(get_value(x, 11)), float(get_value(x, 12))
-    end = float(get_value(x,13)), float(get_value(x, 14)), float(get_value(x, 15))
-    dir_x = (float(get_value(x,10))-float(get_value(x,13)))*(-1)
-    dir_y = (float(get_value(x,11))-float(get_value(x,14)))*(-1)
-    dir_z = (float(get_value(x,12))-float(get_value(x,15)))*(-1)
+    # print(sqrt_start_x)
+    # print(sqrt_start_y)
+    # print(sqrt_start_z)
+    # print(sqrt_end_x)
+    # print(sqrt_end_y)
+    # print(sqrt_end_z)
 
+    dir_x = (sqrt_start_x - sqrt_end_x)
+    dir_y = (sqrt_start_y - sqrt_end_y)
+    dir_z = (sqrt_start_z - sqrt_end_z)
 
     # create_pipe(Object_Name = 1; Object_Id = 2; Outer_Radius = 4; Inner_Radius = 5; Material=8; Length=9; X_start = 10; Y_start = 11; Z_start=12; X_end = 13; Y_end = 14; Z_end=15; Direction=16
-    create_pipe(get_value(x, 1), get_value(x, 2), float(get_value(x, 4)), float(get_value(x, 5)), get_value(x, 8), float(get_value(x, 9)), start, (dir_x, dir_y, dir_z))
-
+    create_pipe(get_value(x, 1), get_value(x, 2), float(get_value(x, 4)), float(get_value(x, 5)), get_value(x, 8),
+                float(get_value(x, 9)), start, (-dir_x, -dir_y, -dir_z))
 
 # ______________________________________________________________________________________________________________________
-
 
 
 # Write the contents of the file to disk
