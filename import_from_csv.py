@@ -2,6 +2,7 @@
 
 # Import csv module and define path
 import csv
+import numpy as np
 
 path = 'data/Pipe_system_short.csv'
 
@@ -55,3 +56,8 @@ def get_list(object):
 for s in data:
     print(*s)
 
+
+
+#start = np.array([float(get_value(1,10)), float(get_value(1, 11)), float(get_value(1, 12))])
+#end = np.array([float(get_value(1,13)), float(get_value(1, 14)), float(get_value(1, 15))])
+#print(start - end)

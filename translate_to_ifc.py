@@ -31,7 +31,7 @@ class PipeSegment(object):
     Floor = ""
     Room = ""
 
-    """Initialize the attributes with a constructor."""
+    """Initialization of the attributes with a constructor."""
 
     # Constructor of the class (initializer)
     def __init__(self, File_Name, Object_Name, Object_Id, IFC_Element, Outer_Radius, Inner_Radius, Pipe_Usage,
@@ -117,6 +117,7 @@ for list in data[1:]:
                                     get_value(x, 16), get_value(x, 17), get_value(x, 18), get_value(x, 19),
                                     get_value(x, 20)))
 print(array)
+
 
 # class SimpleClass(object):
 #    pass
